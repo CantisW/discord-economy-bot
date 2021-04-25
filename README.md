@@ -11,7 +11,7 @@ blockchain.json is just the blockchain data. If you want to "disable" this, then
 
 settings.json are bot settings. Put your prefix and bot token here.
 
-#To Use
+# To Use
 
 Open Visual Studio Code or similar.
 
