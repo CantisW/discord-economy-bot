@@ -23,7 +23,7 @@ Enjoy! Make sure it is set up and you have node.js and discord.js.
 
 # API Setup
 
-To use the API (if you need to access blockchain or user data via HTTP), you need to install Express and Concurrently. **PLease make a package.json first using `npm init`!**
+To use the API (if you need to access blockchain or user data via HTTP), you need to install Express and Concurrently. **Please make a package.json first using `npm init`!**
 Open terminal and type in:
 
 `npm install express --save`
