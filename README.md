@@ -11,12 +11,30 @@ blockchain.json is just the blockchain data. If you want to "disable" this, then
 
 settings.json are bot settings. Put your prefix and bot token here.
 
+server.js is the API app. (Scroll down for more info)
+
 # To Use
 
-Open Visual Studio Code or similar.
-
-Open terminal.
-
-Type in "node ." on index.js without quotes.
+* Open Visual Studio Code or similar.
+* Open terminal.
+* Type in "node ." on index.js without quotes.
 
 Enjoy! Make sure it is set up and you have node.js and discord.js.
+
+# API Setup
+
+To use the API (if you need to access blockchain or user data via HTTP), you need to install Express and Concurrently. **PLease make a package.json first using `npm init`!**
+Open terminal and type in:
+
+`npm install express --save`
+then
+`npm install concurrently --save`
+
+In your newly created package.json, replace "dev" under "scripts" with the following:
+
+`"dev": "concurrently \"node .\" \"node server.js" `
+
+Now you can start both your API and bot using `npm start dev`.
+Don't forget to forward to port 3000 (or whatever you set it to in the server.js).
+
+Enjoy!
