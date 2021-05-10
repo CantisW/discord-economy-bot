@@ -362,7 +362,7 @@ function transfer(id, receiver, amount, hash, timestamp, fee){
     else if (users.accounts[i].userid === receiver) {
       users.accounts[i].balance = users.accounts[i].balance + money;
       
-      Math.round(users.accounts[i].balance * 10**decimals) / 10**decimals;
+      users.accounts[i].balance = Math.round(users.accounts[i].balance * 10**decimals) / 10**decimals;
 
       recepient = true;
       console.log(`Recepient now has ${users.accounts[i].balance}.`)
@@ -396,7 +396,16 @@ function addToBlockchain(id, receiver, amount, hash, timestamp, fee){
   let blockchainjson = fs.readFileSync("./blockchain.json","utf-8");
   let block = JSON.parse(blockchainjson);
 
-  var obj = {"txid":hash, "sender":id, "recepient":receiver, "amount":`${amount}`, "timestamp":`${timestamp}`, "fee":`${fee}`};
+  let length = Object.keys(block.transactions).length;
+  let prev = 0
+
+  if (typeof block.transactions[length-1] === "undefined" || block.transactions[length-1].txid === "undefined") { // check for genesis block
+    console.log("Undefined txid!")
+  } else {
+    prev = block.transactions[length-1].txid;
+  }
+
+  var obj = {"index":length+1, "txid":hash, "sender":id, "recepient":receiver, "amount":`${amount}`, "timestamp":`${timestamp}`, "fee":`${fee}`, "previousHash":prev};
   block.transactions.push(obj);
   console.log("Blockchain updated!")
   fs.writeFile("./blockchain.json", JSON.stringify(block, null, 2), (err) => {
@@ -419,7 +428,7 @@ function getSupply(){
   for (i = 0; i < count; i++) {
     x = x + users.accounts[i].balance
   }
-  return x+data.storedfees;
+  return Math.round((x+data.storedfees) * (10**decimals)) / 10**decimals;
 }
 
 function convert(type, input){
@@ -494,7 +503,7 @@ function newEmbed() {
 		{ name: 'Block Reward', value: `${blockreward}`, inline: true },
     { name: 'Market Cap', value: `${market_cap} ${currency}`},
     { name: 'Fully Diluted Market Cap', value: `${exchangerate*maxsupply} ${currency}`},
-    { name: 'Transaction (TX) Fee', value: `${fee}`},
+    { name: 'Transaction (TX) Fee', value: `${fee}`}
 	)
 	//.addField('', '', true)
 	//.setImage('')
@@ -510,6 +519,8 @@ function leaderboard() {
 
   var count = Object.keys(users.accounts).length;
 
+  let supply = getSupply();
+
   leaderboardEmbed = new Discord.MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle(`${name} (${ticker})`)
@@ -523,7 +534,7 @@ function leaderboard() {
 	.setFooter(`${name} (${ticker})`, ''); // TODO: set url as second arg
 
   for (i = 0; i < count; i++) {
-    leaderboardEmbed.addFields({name: `${users.accounts[i].userid}`, value: `${Math.round(users.accounts[i].balance * (10**decimals))/10**decimals} ${ticker}`})
+    leaderboardEmbed.addFields({name: `${users.accounts[i].userid}`, value: `${Math.round(users.accounts[i].balance * (10**decimals))/10**decimals} ${ticker} (${Math.round((users.accounts[i].balance/supply)*10000)/100}% of supply)`})
   }
 }
 
@@ -577,13 +588,13 @@ function viewTx(txid){
 
   for (i = 0; i < count; i++) {
     if (block.transactions[i].txid == txid) {
-      viewTxInitalize(txid, block.transactions[i].sender, block.transactions[i].recepient, block.transactions[i].amount, block.transactions[i].timestamp, block.transactions[i].fee);
+      viewTxInitalize(block.transactions.index[i], txid, block.transactions[i].sender, block.transactions[i].recepient, block.transactions[i].amount, block.transactions[i].timestamp, block.transactions[i].fee, block.transactions[i].previousHash);
       return true;
     }
   }
 }
 
-function viewTxInitalize(txid, sender, recepient, amount, timestamp, fee){
+function viewTxInitalize(index, txid, sender, recepient, amount, timestamp, fee, previousHash){
   txInfo = new Discord.MessageEmbed()
   .setColor('#0099ff')
   .setTitle(`${name} (${ticker})`)
@@ -592,12 +603,14 @@ function viewTxInitalize(txid, sender, recepient, amount, timestamp, fee){
   .setDescription(`PREFIX: ${prefix}`)
   //.setThumbnail('')
   .addFields(
+   { name: 'Index:', value: `${index}` },
    { name: 'TXID:', value: `${txid}` },
    { name: 'Sender:', value: `${sender}` },
    { name: 'Recepient:', value: `${recepient}` },
    { name: 'Amount Sent:', value: `${amount} ${ticker}` },
    { name: 'Timestamp', value: `${timestamp}` },
    { name: 'TX Fee', value: `${fee} ${ticker}` },
+   { name: 'Previous Hash:', value: `${previousHash}` },
   )
   //.addField('', '', true)
   //.setImage('')
