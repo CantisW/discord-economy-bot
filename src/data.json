@@ -2,7 +2,6 @@
   "name": "EcoCoin",
   "ticker": "ECO",
   "maxsupply": 1000000,
-  "currentsupply": 0,
   "blockreward": 5,
   "exchangerate": 0.08,
   "currency": "iron",
