@@ -3,7 +3,7 @@ import fs from "fs";
 
 import config from "../data/config.json";
 import { getSupply, parseDecimals, getConfig } from "../util/economy-blockchain.js";
-const { coinName, ticker, maxsupply, blockreward, currency, decimals, txfee } = config;
+const { coinName, ticker, maxsupply, blockreward, currency } = config;
 
 export const name = "info";
 export const description = `Get info about ${ticker}`;
@@ -16,6 +16,7 @@ const getInfo = () => {
 	let config = getConfig();
 
 	let exchangerate = config.exchangerate;
+	let txfee = config.txfee;
 	let marketcap = maxsupply*exchangerate;
 	let supply = getSupply();
 
