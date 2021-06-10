@@ -1,0 +1,14 @@
+{
+  "name": "economy-bot",
+  "version": "1.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore ./data/ --experimental-modules --experimental-json-modules ."
+  },
+  "type": "module",
+  "author": "Santeeisweird9",
+  "license": "ISC",
+  "keywords": [],
+  "description": ""
+}
