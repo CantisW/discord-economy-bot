@@ -23,8 +23,7 @@ const helpEmbed = new Discord.MessageEmbed()
     .addFields(
         { name: 'help', value: `Display this message.` },
         { name: 'account', value: `Create an account.` },
-        { name: 'bal', value: `View your balance.`},
-        { name: 'view [userid]', value: `View someone else's balance.`},
+        { name: 'bal (optional: userid)', value: `View your balance or someone else's balance.`},
         { name: 'mine', value: `Mine some ${ticker}!`},
         { name: 'transfer [userid] [amount]', value: `Transfer some ${ticker}.`},
         { name: 'list-tx', value: `List the last 3 transactions.`},

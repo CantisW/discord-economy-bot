@@ -1,5 +1,5 @@
 import { checkIfAccountExists, returnAccountBalance } from "../util/economy-accounts.js"
-import { parseDecimals } from "../util/economy-blockchain.js"
+import { parseDecimals, sanitizeId } from "../util/economy-blockchain.js"
 
 import config from "../data/config.json"
 import { getConfig } from "../util/economy-blockchain.js";
@@ -15,7 +15,7 @@ export const execute = (message,args) => {
         let bal = returnAccountBalance(message.author.id);
         message.reply(`Your account balance is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
     } else {
-        args[0] = args[0].replace(/[\\<>@#&!]/g, "");
+        args[0] = sanitizeId(args[0])
         if (checkIfAccountExists(args[0])) {
             let bal = returnAccountBalance(args[0]);
             message.reply(`The account balance for ${args[0]} is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
