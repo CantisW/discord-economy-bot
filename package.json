@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore ./data/ --experimental-modules --experimental-json-modules ."
+    "start": "node --experimental-modules --experimental-json-modules ."
   },
   "type": "module",
   "author": "Santeeisweird9",
