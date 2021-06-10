@@ -20,17 +20,27 @@ export const getSupply = () => {
     return parseDecimals(supply);
 }
 
+
+//---------------------------------------------------------------
+// Purpose: Convert argument to have defined decimal places
+//---------------------------------------------------------------
 export const parseDecimals = (int) => {
     if (decimals == 0) return int;
     return Math.round(int * (10**decimals)) / (10**decimals)
 }
 
+//---------------------------------------------------------------
+// Purpose: Parse user data JSON
+//---------------------------------------------------------------
 export const getUsers = () => {
     let usersjson = fs.readFileSync("./data/user-data.json","utf-8"); // Note: This is in relation to WORKING DIRECTORY (index.js)!
     let x = JSON.parse(usersjson);
     return x;
 }
 
+//---------------------------------------------------------------
+// Purpose: Parse config data JSON
+//---------------------------------------------------------------
 export const getConfig = () => {
     let configjson = fs.readFileSync("./data/config.json","utf-8");
     let x = JSON.parse(configjson);
