@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getUsers } from "../util/economy-blockchain.js"
+import { parseDecimals, getUsers } from "../util/economy-blockchain.js"
 
 export const createAccount = (id) => {
     let users = getUsers();
@@ -23,6 +23,13 @@ export const checkIfAccountExists = (id) => {
     return false;
 }
 
-export const returnAccountBalance = () => {
+export const returnAccountBalance = (id) => {
+    let users = getUsers();
+    let count = Object.keys(users.accounts).length;
 
+    for (let i = 0; i<count; i++){
+        if (users.accounts[i].userid == id){
+            return parseDecimals(users.accounts[i].balance);
+        }
+    }
 }
