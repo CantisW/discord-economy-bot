@@ -1,4 +1,4 @@
-# Guilded Economy Bot
+# Discord Economy Bot
 
 A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any similar game).
 
