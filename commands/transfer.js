@@ -21,8 +21,13 @@ export const execute = (message,args) => {
     }
     args[0] = sanitizeId(args[0])
     if(checkIfAccountExists(args[0])){
+        args[1] = parseFloat(args[1])
         if(!(typeof args[1] == "number")){
             message.channel.send("Amount argument must be a number!");
+            return;
+        }
+        if(args[0] == message.authorID){
+            message.channel.send("You can't transfer to yourself.")
             return;
         }
         if(transfer(message.authorID, args[0], args[1], txid, timestamp)) {
