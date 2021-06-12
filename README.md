@@ -1,6 +1,6 @@
 # Guilded Economy Bot
 
-An in-development fork of [discord-economy-bot](https://github.com/Santeeisweird9/discord-economy-bot) for Guilded.
+A fork of [discord-economy-bot](https://github.com/Santeeisweird9/discord-economy-bot) for Guilded.
 
 A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any similar game).
 
@@ -25,7 +25,7 @@ app.js is the API app. (Scroll down for more info)
 Optionally, you can go into package.json and replace "start" under "scripts" with `node --experimental-modules --experimental-json-modules .`
 This allows you to type in "npm start" instead of the longer version above.
 
-Enjoy! Make sure it is set up and you have node.js and discord.js.
+Enjoy! Make sure it is set up and you have node.js and @guildedjs/guilded.js (v1.1.5 or higher).
 
 # API Setup
 
