@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import { RichEmbed } from "@guildedjs/guilded.js";
 
 import settings from "../data/bot-settings.json";
 import config from "../data/config.json";
@@ -13,8 +13,8 @@ export const execute = (message,args) => {
     message.channel.send(helpEmbed)
 };
 
-const helpEmbed = new Discord.MessageEmbed()
-    .setColor('#0099ff')
+const helpEmbed = new RichEmbed()
+    .setColor('0xf1c40f')
     .setTitle(`${name} (${ticker})`)
     //.setURL('')
     //.setAuthor('Santeeisweird9')
@@ -23,8 +23,7 @@ const helpEmbed = new Discord.MessageEmbed()
     .addFields(
         { name: 'help', value: `Display this message.` },
         { name: 'account', value: `Create an account.` },
-        { name: 'bal', value: `View your balance.`},
-        { name: 'view [userid]', value: `View someone else's balance.`},
+        { name: 'bal (optional: userid)', value: `View your balance or someone else's balance.`},
         { name: 'mine', value: `Mine some ${ticker}!`},
         { name: 'transfer [userid] [amount]', value: `Transfer some ${ticker}.`},
         { name: 'list-tx', value: `List the last 3 transactions.`},
