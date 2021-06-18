@@ -49,6 +49,6 @@ const viewTxInitalize = (index, txid, sender, recepient, amount, timestamp, fee,
         //.addField('', '', true)
         //.setImage('')
         .setTimestamp()
-        .setFooter(`${name} (${ticker})`, ''); // TODO: set url as second arg
+        .setFooter(`${coinName} (${ticker})`, ''); // TODO: set url as second arg
     return txInfo;
 }

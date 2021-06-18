@@ -47,6 +47,6 @@ const listTx = () => {
         //.addField('', '', true)
         //.setImage('')
          .setTimestamp()
-         .setFooter(`${name} (${ticker})`, ''); // TODO: set url as second arg
+         .setFooter(`${coinName} (${ticker})`, ''); // TODO: set url as second arg
     return transactionsList;
 }
