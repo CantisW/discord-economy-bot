@@ -24,12 +24,12 @@ const helpEmbed = new RichEmbed()
     .addFields(
         { name: 'help', value: `Display this message.` },
         { name: 'account', value: `Create an account.` },
-        { name: 'bal (optional: userid)', value: `View your balance or someone else's balance.`},
+        { name: 'bal {optional: userid}', value: `View your balance or someone else's balance.`},
         { name: 'mine', value: `Mine some ${ticker}!`},
-        { name: 'transfer [userid] [amount]', value: `Transfer some ${ticker}.`},
+        { name: 'transfer {userid} {amount}', value: `Transfer some ${ticker}.`},
         { name: 'list-tx', value: `List the last 3 transactions.`},
-        { name: 'view-tx [txid]', value: `View information on a transaction.`},
-        { name: 'convert [type] [amount]', value: `Easily convert currency.`},
+        { name: 'view-tx {txid}', value: `View information on a transaction.`},
+        { name: 'convert {type} {amount}', value: `Easily convert currency.`},
         { name: 'leaderboard', value: `View the global leaderboard.`},
         { name: 'info', value: `View info about this bot!`},
     )
