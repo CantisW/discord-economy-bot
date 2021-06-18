@@ -16,7 +16,7 @@ export const execute = (message,args) => {
 
 const helpEmbed = new RichEmbed()
     .setColor('0xf1c40f')
-    .setTitle(`${name} (${ticker})`)
+    .setTitle(`${coinName} (${ticker})`)
     //.setURL('')
     //.setAuthor('Santeeisweird9')
     .setDescription(`PREFIX: ${prefix}`)
