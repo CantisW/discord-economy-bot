@@ -8,6 +8,7 @@ const { coinName, ticker } = config;
 
 export const name = "help";
 export const description = "Get help on commands.";
+export const aliases = ["commands", "cmds"]
 
 export const execute = (message,args) => {
     message.channel.send(helpEmbed)

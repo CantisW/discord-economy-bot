@@ -14,7 +14,7 @@ export const execute = (message,args) => {
         message.channel.send("Force-Account (FA) is a developer-only command.");
         return;
     }
-    args[0] = sanitizeId(args[0]);
+    args[0] = sanitizeId(args[0], 0);
     createAccount(args[0]);
     message.channel.send(`Account ${args[0]} made.`)
 };

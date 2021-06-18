@@ -19,7 +19,7 @@ export const execute = (message,args) => {
         message.channel.send("You need to make an account before you initiate any transfers.")
         return;
     }
-    args[0] = sanitizeId(args[0])
+    args[0] = sanitizeId(message, 0)
     if(checkIfAccountExists(args[0])){
         args[1] = parseFloat(args[1])
         if(!(typeof args[1] == "number")){

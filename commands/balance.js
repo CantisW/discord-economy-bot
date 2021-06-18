@@ -19,10 +19,12 @@ export const execute = (message,args) => {
             message.channel.send("you need an account before you can check your balance.")
         }
     } else {
-        args[0] = sanitizeId(args[0])
+        args[0] = sanitizeId(message, 0)
         if (checkIfAccountExists(args[0])) {
             let bal = returnAccountBalance(args[0]);
             message.channel.send(`The account balance for ${args[0]} is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
+        } else {
+            message.channel.send(`The account ${args[0]} does not exist.`)
         }
     }
 };
