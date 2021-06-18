@@ -87,10 +87,10 @@ export const parseDecimals = (int) => {
 }
 
 //---------------------------------------------------------------
-// Purpose: Remove characters from mentions (@someone)
+// Purpose: Get mentions because this API doesn't seem to have an intuitive implementation
 //---------------------------------------------------------------
-export const sanitizeId = (id) => {
-    return id.replace(/[\\<>@#&!]/g, "");
+export const sanitizeId = (message, order) => {
+    return message.parsedContent.mentions.users[order];
 }
 
 //---------------------------------------------------------------
@@ -126,4 +126,35 @@ export const getBlockchain = () => {
 export const hash = (timestamp) => {
     let nonce = Math.random() * 99999999
     return crypto.createHash('md5').update(`${timestamp*nonce}`).digest("hex");
+}
+
+//---------------------------------------------------------------
+// Purpose: Sort the leaderboard array through the insertion sorting algorithm
+//---------------------------------------------------------------
+export const insertionSort = (array) => {
+    let length = array.length;
+    for (let i = 1; i < length; i++){
+
+        let current = array[i];
+        let j = i-1;
+
+        while (j >= 0 && array[j] > current){
+            array[j+1] = array[j];
+            j = j-1;
+        }
+        array[j+1] = current;
+    }
+}
+
+//---------------------------------------------------------------
+// Purpose: Gets ID from balance. Probably could be useful in the future
+//---------------------------------------------------------------
+export const getIDFromBalance = (balance) => {
+    let users = getUsers();
+    let count = Object.keys(users.accounts).length
+    for (let i = 0; i < count; i++){
+        if (users.accounts[i].balance == balance) {
+            return users.accounts[i].userid;
+        }
+    }
 }
