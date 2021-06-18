@@ -16,10 +16,12 @@ export const execute = (message,args) => {
             let bal = returnAccountBalance(message.authorID);
             message.channel.send(`Your account balance is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
         } else {
-            message.channel.send("you need an account before you can check your balance.")
+            message.channel.send("You need an account before you can check your balance.")
         }
     } else {
-        args[0] = sanitizeId(message, 0)
+        if (args[0].startsWith('\n@')){
+            args[0] = sanitizeId(message, 0)
+        }
         if (checkIfAccountExists(args[0])) {
             let bal = returnAccountBalance(args[0]);
             message.channel.send(`The account balance for ${args[0]} is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
