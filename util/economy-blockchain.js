@@ -138,7 +138,7 @@ export const insertionSort = (array) => {
         let current = array[i];
         let j = i-1;
 
-        while (j >= 0 && array[j] > current){
+        while (j >= 0 && array[j] < current){
             array[j+1] = array[j];
             j = j-1;
         }
