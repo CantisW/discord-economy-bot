@@ -15,8 +15,8 @@ const getInfo = () => {
 
 	let exchangerate = config.exchangerate;
 	let txfee = config.txfee;
-	let marketcap = parseDecimals(maxsupply*exchangerate);
 	let supply = getSupply();
+	let marketcap = parseDecimals(supply*exchangerate);
 
     const infoEmbed = new RichEmbed()
 		.setColor('0xf1c40f')
