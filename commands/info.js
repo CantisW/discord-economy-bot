@@ -15,7 +15,7 @@ const getInfo = () => {
 
 	let exchangerate = config.exchangerate;
 	let txfee = config.txfee;
-	let marketcap = maxsupply*exchangerate;
+	let marketcap = parseDecimals(maxsupply*exchangerate);
 	let supply = getSupply();
 
     const infoEmbed = new RichEmbed()
@@ -31,9 +31,9 @@ const getInfo = () => {
 			{ name: 'Current Supply', value: `${supply}`, inline: true },
 			{ name: 'Block Reward', value: `${blockreward}`, inline: true },
   	 		{ name: 'Market Cap', value: `${marketcap} ${currency}`},
-  		  	{ name: 'Fully Diluted Market Cap', value: `${exchangerate*maxsupply} ${currency}`},
-   			{ name: 'Transaction (TX) Fee', value: `${txfee}`}
-    		//{ name: 'Data', value: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxUPmNczrjFQu-XTxVYGKh65KMoUc_JllrbJ1LUaBPY0NwlvBDEfHg01oZ2OQM-Eoq1aMYTmsmwFUa/pubchart?oid=486439618&format=interactive'}
+  		  	{ name: 'Fully Diluted Market Cap', value: `${parseDecimals(exchangerate*maxsupply)} ${currency}`},
+   			{ name: 'Transaction (TX) Fee', value: `${txfee}`},
+    		{ name: 'Data', value: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxUPmNczrjFQu-XTxVYGKh65KMoUc_JllrbJ1LUaBPY0NwlvBDEfHg01oZ2OQM-Eoq1aMYTmsmwFUa/pubchart?oid=486439618&format=interactive'}
 		)
 		//.addField('', '', true)
 		//.setImage('')
