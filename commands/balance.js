@@ -14,7 +14,7 @@ export const execute = (message,args) => {
         if(checkIfAccountExists(message.authorID)) {
             let config = getConfig();
             let bal = returnAccountBalance(message.authorID);
-            message.channel.send(`Your account balance is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
+            message.channel.send(`Your account balance is: ${bal} ${ticker} (${parseDecimals(bal*(config.exchangerate))} ${currency})`)
         } else {
             message.channel.send("You need an account before you can check your balance.")
         }
