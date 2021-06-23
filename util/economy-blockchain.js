@@ -81,9 +81,9 @@ export const addToBlockchain = (txid, sender, recepient, amount, timestamp, fee)
 //---------------------------------------------------------------
 // Purpose: Convert argument to have defined decimal places
 //---------------------------------------------------------------
-export const parseDecimals = (int) => {
+export const parseDecimals = (int, places = decimals) => {
     if (decimals == 0) return int;
-    return Math.round(int * (10**decimals)) / (10**decimals)
+    return Math.round(int * (10**places)) / (10**places)
 }
 
 //---------------------------------------------------------------
