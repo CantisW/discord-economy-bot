@@ -65,10 +65,15 @@ export const mine = (id) => {
 //---------------------------------------------------------------
 export const addToBlockchain = (txid, sender, recepient, amount, timestamp, fee) => {
     let blockchain = getBlockchain();
-    let length = Object.keys(blockchain.transactions).length;
+    let length = 0;
+
+    if (blockchain.transactions) {
+        length = Object.keys(blockchain.transactions).length;
+    }
+
     let prev = "0";
 
-    if(!(typeof blockchain.transactions[length-1] == "undefined")){ // genesis block check
+    if(!(length == 0)){ // genesis block check
         prev = blockchain.transactions[length-1].txid
     }
     let obj = {"index":length+1,"txid":txid,"sender":sender,"recepient":recepient,"amount":amount,"timestamp":timestamp,"fee":fee,"previousHash":prev}
