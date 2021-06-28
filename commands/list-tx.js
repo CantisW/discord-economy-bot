@@ -15,6 +15,10 @@ export const execute = (message,args) => {
 
 const listTx = () => {
     let block = getBlockchain();
+
+    if (!block.transactions || Object.keys(block.transactions).length == 0) {
+      return "There are no transactions to list!";
+    }
   
     let count = Object.keys(block.transactions).length
   

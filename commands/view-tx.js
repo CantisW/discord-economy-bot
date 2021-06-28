@@ -11,7 +11,7 @@ export const aliases = ["view"];
 
 export const execute = (message,args) => {
     if(!args.length){
-        message.reply("please provide a TXID!")
+        message.channel.send("Please provide a TXID!")
     }
     message.channel.send(viewTx(args[0]))
 };
