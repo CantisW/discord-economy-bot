@@ -17,6 +17,7 @@ const getInfo = () => {
 	let txfee = config.txfee;
 	let supply = getSupply();
 	let marketcap = parseDecimals(supply*exchangerate);
+	let places = config.decimals;
 
     const infoEmbed = new RichEmbed()
 		.setColor('0xf1c40f')
@@ -30,7 +31,7 @@ const getInfo = () => {
 			{ name: 'Exchange Rate', value: `1 ${ticker} for ${exchangerate} ${currency}.\n1 ${currency} for ${parseDecimals(1/exchangerate)} ${ticker}.` },
 			{ name: 'Current Supply', value: `${supply}`, inline: true },
 			{ name: 'Block Reward', value: `${blockreward}`, inline: true },
-			{ name: 'Amount Mined', value: `${parseDecimals((supply/maxsupply), 4)}% of max supply`},
+			{ name: 'Amount Mined', value: `${parseDecimals((supply/maxsupply), 4) * (10**places)}% of max supply`},
   	 		{ name: 'Market Cap', value: `${marketcap} ${currency}`},
   		  	{ name: 'Fully Diluted Market Cap', value: `${parseDecimals(exchangerate*maxsupply)} ${currency}`},
    			{ name: 'Transaction (TX) Fee', value: `${txfee}`},
