@@ -34,8 +34,7 @@ const getInfo = () => {
 			{ name: 'Amount Mined', value: `${parseDecimals((supply/maxsupply), 4) * (10**places)}% of max supply`},
   	 		{ name: 'Market Cap', value: `${marketcap} ${currency}`},
   		  	{ name: 'Fully Diluted Market Cap', value: `${parseDecimals(exchangerate*maxsupply)} ${currency}`},
-   			{ name: 'Transaction (TX) Fee', value: `${txfee}`},
-    		{ name: 'Data', value: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxUPmNczrjFQu-XTxVYGKh65KMoUc_JllrbJ1LUaBPY0NwlvBDEfHg01oZ2OQM-Eoq1aMYTmsmwFUa/pubhtml?gid=0&single=true'}
+   			{ name: 'Transaction (TX) Fee', value: `${txfee}`}
 		)
 		//.addField('', '', true)
 		//.setImage('')
