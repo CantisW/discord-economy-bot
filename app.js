@@ -51,7 +51,7 @@ app.get("/id/:id", (req, res) => {
     let id = req.params.id;
 
     if (req.params) {
-        for (i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if (users.accounts[i].userid == id) {
                 return res.json(users.accounts[i]);
             }
