@@ -35,7 +35,7 @@ app.get("/blockchain/:txid", (req, res) => {
     let id = req.params.txid;
 
     if (req.params) {
-        for (i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if (block.transactions[i].txid == id) {
                 return res.json(block.transactions[i]);
             }
