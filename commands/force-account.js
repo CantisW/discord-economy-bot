@@ -10,13 +10,11 @@ export const execute = (message,args) => {
         message.channel.send("Please provide a userid argument!");
         return;
     }
-    if(!(message.authorID == "ndlR12OA")) {
+    if(!(message.author.id == "301770103224270851")) {
         message.channel.send("Force-Account (FA) is a developer-only command.");
         return;
     }
-    if (args[0].startsWith('\n@')){
-        args[0] = sanitizeId(message, 0);
-    }
+    if (args[0]) args[0] = sanitizeId(args[0]);
     createAccount(args[0]);
     message.channel.send(`Account ${args[0]} made.`)
 };

@@ -88,14 +88,14 @@ export const addToBlockchain = (txid, sender, recepient, amount, timestamp, fee)
 //---------------------------------------------------------------
 export const parseDecimals = (int, places = decimals) => {
     if (decimals == 0) return int;
-    return Math.round(int * (10**places)) / (10**places)
+    return Math.round(int * (10**places)) / (10**places);
 }
 
 //---------------------------------------------------------------
-// Purpose: Get mentions because this API doesn't seem to have an intuitive implementation
+// Purpose: Remove characters from mentions (@someone)
 //---------------------------------------------------------------
-export const sanitizeId = (message, order) => {
-    return message.parsedContent.mentions.users[order];
+export const sanitizeId = (id) => {
+    return id.replace(/[\\<>@#&!]/g, "");
 }
 
 //---------------------------------------------------------------

@@ -16,13 +16,20 @@ export const checkIfAccountExists = (id) => {
     let count = Object.keys(users.accounts).length;
 
     for (let i = 0; i<count; i++){
-        if (users.accounts[i].userid == id){
+        if (users.accounts[i].userid === id){
             return true;
         }
     }
     return false;
 }
 
-export const returnAccountBalance = () => {
+export const returnAccountBalance = (id) => {
+    let users = getUsers();
+    let count = Object.keys(users.accounts).length;
 
+    for (let i = 0; i<count; i++){
+        if (users.accounts[i].userid === id){
+            return users.accounts[i].balance;
+        }
+    }
 }

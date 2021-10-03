@@ -1,4 +1,5 @@
-import { RichEmbed } from "@guildedjs/guilded.js";
+import { MessageEmbed } from "discord.js";
+
 import { getBlockchain } from "../util/economy-blockchain.js";
 import config from "../data/config.json";
 import settings from "../data/bot-settings.json"
@@ -10,7 +11,7 @@ export const description = "Get the list of transactions.";
 export const aliases = ["list"];
 
 export const execute = (message,args) => {
-    message.channel.send(listTx());
+    message.channel.send({ embeds: [listTx()] });
 };
 
 const listTx = () => {
@@ -38,7 +39,7 @@ const listTx = () => {
       }
     }
 
-   const transactionsList = new RichEmbed()
+   const transactionsList = new MessageEmbed()
         .setColor('0xf1c40f')
          .setTitle(`${coinName} (${ticker})`)
          //.setURL('')

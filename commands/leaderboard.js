@@ -1,4 +1,5 @@
-import { RichEmbed } from "@guildedjs/guilded.js";
+import { MessageEmbed } from "discord.js";
+
 import { getSupply, getUsers, parseDecimals, insertionSort, getIDFromBalance } from "../util/economy-blockchain.js";
 import config from "../data/config.json";
 const { coinName, ticker } = config;
@@ -8,7 +9,7 @@ export const description = "Get the global leaderboard.";
 export const aliases = ["lb"]
 
 export const execute = (message, args) => {
-    message.channel.send(getLeaderboard());
+    message.channel.send({ embeds: [getLeaderboard()] });
 };
 
 const getLeaderboard = () => {
@@ -23,7 +24,7 @@ const getLeaderboard = () => {
     }
     insertionSort(balArray)
 
-    const leaderboardEmbed = new RichEmbed()
+    const leaderboardEmbed = new MessageEmbed()
         .setColor('0xf1c40f')
         .setTitle(`${coinName} (${ticker})`)
         //.setURL('')

@@ -1,4 +1,4 @@
-import { RichEmbed } from "@guildedjs/guilded.js";
+import { MessageEmbed } from "discord.js";
 
 import settings from "../data/bot-settings.json";
 import config from "../data/config.json";
@@ -11,10 +11,10 @@ export const description = "Get help on commands.";
 export const aliases = ["commands", "cmds"]
 
 export const execute = (message,args) => {
-    message.channel.send(helpEmbed)
+    message.channel.send({ embeds: [helpEmbed] })
 };
 
-const helpEmbed = new RichEmbed()
+const helpEmbed = new MessageEmbed()
     .setColor('0xf1c40f')
     .setTitle(`${coinName} (${ticker})`)
     //.setURL('')

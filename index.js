@@ -1,30 +1,21 @@
-import { Client } from "@guildedjs/guilded.js";
-import fs from "fs"
+import Discord, { Client, Intents } from "discord.js";
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+
+import fs from "fs";
 
 import settings from './data/bot-settings.json';
-const { email, password, prefix, status } = settings;
+const { token, prefix, status } = settings;
 
-const client = new Client();
+client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 
-let commandsMap = new Map();
-let cooldownsMap = new Map();
-
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
-
-
-// This wrapper has discord.js/collections as a dependency
-// but I don't know how to utilize the collections (if any)
-// So I'll use this method instead (which I used for guilded.js.gg before the switch to this lib)
-// Sadly this means I have to add aliases along with commands which means more stuff to check
+const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js")); // read commands, make sure they end in js!
 
 for (const file of commandFiles) {
     const command = await import(`./commands/${file}`); // semi-hacky way to allow dynamic imports until ES6 actually allows dynamic imports
-    commandsMap.set(command.name, command);
-    if (command.aliases){
-        for (const a in command.aliases){
-            commandsMap.set(command.aliases[a], command); // view comments above
-        }
-    }
+    client.commands.set(command.name, command); // name is a property within command file; set name to command file
+    // We do not need to check for aliases unlike the guilded bot here
+    // since they are checked by the command handler thanks to collections
     console.log("Command loaded: " + command.name);
 }
 
@@ -41,27 +32,27 @@ client.on('ready', () => {
 
 client.on("messageCreate", msg => {
 
-    if (!msg.content.startsWith(prefix) || client.user.id == msg.authorID) return; // Check if command starts with prefix or is sent by bot
+    if (!msg.content.startsWith(prefix) || msg.author.bot) return; // Check if command starts with prefix or is sent by bot
 
     const args = msg.content.slice(prefix.length).trim().split(/ +/); // Get content, remove prefix, remove spaces at start and end, and split where there's a space
     const commandName = args.shift().toLowerCase(); // removes first from "args" and returns it as "command"
 
-    const commandObj = commandsMap.get(commandName);
+    const commandObj = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
     if (!commandObj) return; // Does this command exist?
 
-    let command = commandObj.name // to lazy to edit current code so this works for now
-    let cooldown = commandsMap.get(command).cooldown * 1000 || 3 * 1000;
+    let command = commandObj.name; // to lazy to edit current code so this works for now
+    let cooldown = client.commands.get(command).cooldown * 1000 || 3 * 1000;
 
     
 
     // this is a REALLY hacky way to do cooldowns
     // but it works so whatever
 
-    let cooldown_token = msg.authorID+"."+command
+    let cooldown_token = msg.author.id+"."+command;
     
-    if (cooldownsMap.has(cooldown_token) && cooldownsMap.get(cooldown_token) == cooldown) { // Cooldown code
-        let time = commandsMap.get(command).cooldown || 3;
+    if (client.cooldowns.has(cooldown_token) && client.cooldowns.get(cooldown_token) == cooldown) { // Cooldown code
+        let time = client.commands.get(command).cooldown || 3;
         //
         // dynamic cooldown
         //
@@ -69,29 +60,26 @@ client.on("messageCreate", msg => {
             msg.channel.send(`Please wait ${time/60} minutes!`);
         } else {
             msg.channel.send(`Please wait ${time} seconds!`);
-        }
+        };
     } else {
-        cooldownsMap.set(cooldown_token, cooldown);
+        client.cooldowns.set(cooldown_token, cooldown);
         setTimeout(() => {
-            for (const [key, value] of cooldownsMap.entries()) {
+            for (const [key, value] of client.cooldowns.entries()) {
                 if (key == cooldown_token && value == cooldown) {
-                    cooldownsMap.delete(key);
-                }
-            }
+                    client.cooldowns.delete(key);
+                };
+            };
             
-        }, cooldown)
+        }, cooldown);
         //
         // Command handler
         //
         try {
-            commandsMap.get(command).execute(msg, args); // msg passes message object so that you can send messages through command files
+            client.commands.get(command).execute(msg, args); // msg passes message object so that you can send messages through command files
         } catch (err) {
             console.error(err);
-        }
-    }
+        };
+    };
 });
 
-client.login({
-    email: email,
-    password: password,
-});
+client.login(token);

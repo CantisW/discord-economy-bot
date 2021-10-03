@@ -1,4 +1,5 @@
-import { RichEmbed } from "@guildedjs/guilded.js";
+import { MessageEmbed } from "discord.js";
+
 import { getBlockchain } from "../util/economy-blockchain.js";
 import config from "../data/config.json";
 import settings from "../data/bot-settings.json"
@@ -13,7 +14,7 @@ export const execute = (message,args) => {
     if(!args.length){
         message.channel.send("Please provide a TXID!")
     }
-    message.channel.send(viewTx(args[0]))
+    message.channel.send({ embeds: [viewTx(args[0])] })
 };
 
 const viewTx = (txid) => {
@@ -29,7 +30,7 @@ const viewTx = (txid) => {
 }
 
 const viewTxInitalize = (index, txid, sender, recepient, amount, timestamp, fee, previousHash) => {
-    const txInfo = new RichEmbed()
+    const txInfo = new MessageEmbed()
         .setColor('0xf1c40f')
         .setTitle(`${coinName} (${ticker})`)
         //.setURL('')

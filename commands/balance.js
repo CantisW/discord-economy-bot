@@ -11,22 +11,20 @@ export const aliases = ["bal"];
 
 export const execute = (message,args) => {
     if(!args.length){
-        if(checkIfAccountExists(message.authorID)) {
+        if(checkIfAccountExists(message.author.id)) {
             let config = getConfig();
-            let bal = returnAccountBalance(message.authorID);
+            let bal = returnAccountBalance(message.author.id);
             message.channel.send(`Your account balance is: ${bal} ${ticker} (${parseDecimals(bal*(config.exchangerate))} ${currency})`)
         } else {
             message.channel.send("You need an account before you can check your balance.")
         }
     } else {
-        if (args[0].startsWith('\n@')){
-            args[0] = sanitizeId(message, 0)
-        }
-        if (checkIfAccountExists(args[0])) {
+        if (args[0]) args[0] = sanitizeId(args[0]); // assume first argument is a mention since it's checked below
+        if (checkIfAccountExists(args[0])) { // check if account exists
             let bal = returnAccountBalance(args[0]);
-            message.channel.send(`The account balance for ${args[0]} is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`)
+            message.channel.send(`The account balance for ${args[0]} is: ${bal} ${ticker} (${parseDecimals(bal*config.exchangerate)} ${currency})`);
         } else {
-            message.channel.send(`The account ${args[0]} does not exist.`)
+            message.channel.send(`The account ${args[0]} does not exist.`);
         }
     }
 };
