@@ -21,13 +21,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in!`);
-    client.user.setPresence({
-        status: "online",
-        activity: {
-            name: `${prefix} | ${status}`,
-            type: "PLAYING"
-        }
-    });
+    client.user.setPresence({ activities: [{ name: `${prefix} | ${status}` }], status: 'online' });
 });
 
 client.on("messageCreate", msg => {
