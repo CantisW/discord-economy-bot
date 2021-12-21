@@ -1,6 +1,4 @@
-# Guilded Economy Bot
-
-A fork of [discord-economy-bot](https://github.com/Santeeisweird9/discord-economy-bot) for Guilded.
+# Discord Economy Bot
 
 A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any similar game).
 
