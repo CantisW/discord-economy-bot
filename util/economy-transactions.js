@@ -1,7 +1,7 @@
 import fs from "fs"
 import { checkIfAccountExists, returnAccountBalance } from "./economy-accounts.js";
 import { addToBlockchain, getBlockchain, getConfig, getUsers, parseDecimals } from "./economy-blockchain.js";
-import config from "../data/config.json";
+import config from "../data/config.json" assert { type: "json" };
 const { txfee } = config;
 
 export const transfer = (sender, recepient, amount, hash, timestamp) => {

@@ -1,4 +1,4 @@
-import config from "../data/config.json";
+import config from "../data/config.json" assert { type: "json" };
 import fs from "fs";
 import crypto from "crypto"
 
