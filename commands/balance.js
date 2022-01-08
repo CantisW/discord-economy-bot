@@ -1,7 +1,7 @@
 import { checkIfAccountExists, returnAccountBalance } from "../util/economy-accounts.js"
 import { parseDecimals, sanitizeId } from "../util/economy-blockchain.js"
 
-import config from "../data/config.json"
+import config from "../data/config.json" assert { type: "json" };
 import { getConfig } from "../util/economy-blockchain.js";
 const { ticker, currency } = config;
 

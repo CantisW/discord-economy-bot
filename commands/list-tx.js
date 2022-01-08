@@ -1,8 +1,8 @@
 import { MessageEmbed } from "discord.js";
 
 import { getBlockchain } from "../util/economy-blockchain.js";
-import config from "../data/config.json";
-import settings from "../data/bot-settings.json"
+import config from "../data/config.json" assert { type: "json" };
+import settings from "../data/bot-settings.json" assert { type: "json" };
 const { coinName, ticker } = config;
 const { prefix } = settings;
 

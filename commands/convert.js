@@ -1,5 +1,5 @@
 import { getConfig, parseDecimals } from "../util/economy-blockchain.js";
-import config from "../data/config.json";
+import config from "../data/config.json" assert { type: "json" };
 const { ticker, currency } = config;
 
 export const name = "convert";

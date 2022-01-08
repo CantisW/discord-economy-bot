@@ -1,7 +1,7 @@
 import { checkIfAccountExists } from "../util/economy-accounts.js";
 import { sanitizeId, hash } from "../util/economy-blockchain.js";
 import { transfer } from "../util/economy-transactions.js";
-import config from "../data/config.json";
+import config from "../data/config.json" assert { type: "json" };
 const { ticker, txfee } = config;
 
 export const name = "transfer";

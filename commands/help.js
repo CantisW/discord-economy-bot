@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 
-import settings from "../data/bot-settings.json";
-import config from "../data/config.json";
+import settings from "../data/bot-settings.json" assert { type: "json" };
+import config from "../data/config.json" assert { type: "json" };
 
 const { prefix } = settings;
 const { coinName, ticker } = config;

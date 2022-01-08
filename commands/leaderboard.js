@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 
 import { getSupply, getUsers, parseDecimals, insertionSort, getIDFromBalance } from "../util/economy-blockchain.js";
-import config from "../data/config.json";
+import config from "../data/config.json" assert { type: "json" };
 const { coinName, ticker } = config;
 
 export const name = "leaderboard";
