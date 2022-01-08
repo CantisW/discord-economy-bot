@@ -12,6 +12,8 @@
   "keywords": [],
   "description": "",
   "dependencies": {
-    "discord.js": "^13.5.1"
+    "discord.js": "^13.5.1",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
   }
 }
