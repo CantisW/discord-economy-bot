@@ -3,7 +3,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 import fs from "fs";
 
-import settings from './data/bot-settings.json';
+import settings from './data/bot-settings.json' assert { type: "json" };
 const { token, prefix, status } = settings;
 
 client.commands = new Discord.Collection();
