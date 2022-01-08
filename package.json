@@ -1,5 +1,5 @@
 {
-  "name": "guilded-economy-bot",
+  "name": "discord-economy-bot",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,6 @@
   "keywords": [],
   "description": "",
   "dependencies": {
-    "@guildedjs/guilded.js": "^1.1.5"
+    "discord.js": "^13.5.1"
   }
 }
