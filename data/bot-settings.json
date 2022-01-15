@@ -1,6 +1,9 @@
 {
   "token":"YOUR_BOT_TOKEN_HERE https://discord.com/developers/applications",
   "prefix":"eco!",
-  "status":"The decentralized currency of Minecraft"
+  "status":"The decentralized currency of Minecraft",
+  "allow_competition":false,
+  "disable_botting":true,
+  "environment":"dev"
 }
   
