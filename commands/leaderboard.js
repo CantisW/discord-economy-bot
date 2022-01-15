@@ -34,7 +34,7 @@ const getLeaderboard = () => {
         //.addField('', '', true)
         //.setImage('')
         .setTimestamp()
-        .setFooter(`${name} (${ticker})`, ''); // TODO: set url as second arg
+        .setFooter(`${coinName} (${ticker})`, ''); // TODO: set url as second arg
 
         for (let i = 0; i < count; i++) {
             leaderboardEmbed.addFields(
