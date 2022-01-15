@@ -1,10 +1,16 @@
 import Discord, { Client, Intents } from "discord.js";
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
 import fs from "fs";
+import dotenv from "dotenv";
+import { returnBotSettings } from "./util/economy-bot.js";
 
-import settings from './data/bot-settings.json' assert { type: "json" };
-const { token, prefix, status } = settings;
+
+
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const { environment, prefix, status } = returnBotSettings();
+
+if (environment == "dev") dotenv.config({ path: './.env' });
+
+const token = environment === "production" ? returnBotSettings("token") : process.env.TOKEN; // check for dev stuff so I don't leak my bot token
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
