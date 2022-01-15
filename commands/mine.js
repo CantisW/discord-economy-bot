@@ -26,7 +26,6 @@ export const execute = (message,args) => {
 
     if(mine(message.author.id)){
         let antiBotCooldown = 3*Math.random()*1000;
-        console.log(antiBotCooldown);
         minedList.push(message.author.id);
         mined = true;
         setTimeout(() => {
