@@ -1,12 +1,10 @@
-import Discord from "discord.js";
 import { checkIfAccountExists } from "../util/economy-accounts.js"
 import { getConfig, mine } from "../util/economy-blockchain.js";
 import { returnBotSettings } from "../util/economy-bot.js";
-import settings from "../data/bot-settings.json" assert { type: "json" }
 
 export const name = "mine";
 export const description = "Mine some currency!";
-export const cooldown = 5;
+export const cooldown = 15*60;
 
 const competition = returnBotSettings("allow_competition");
 const antiBot = returnBotSettings("disable_botting");
