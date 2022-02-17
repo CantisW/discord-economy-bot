@@ -1,5 +1,6 @@
 {
-    "token":"OTQyMTU3ODI2MDQ5MDczMjIy.Ygga2g.DrxV_ZVT0Wvt4WysBbav30srBWs",
+    "token":"YOUR_TOKEN_HERE",
     "prefix":"!",
-    "guildId":"884297693684449341"
+    "guildId":"YOUR_GUILD_ID_HERE",
+    "environment":"production"
 }
