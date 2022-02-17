@@ -11,7 +11,7 @@ export const getConfig = (): object => {
     return JSON.parse(config);
 }
 
-export const returnSetting = (setting: string): object => {
+export const returnSetting = (setting: string) => {
     let bot = fs.readFileSync("./src/data/bot.json","utf-8");
     let settings = JSON.parse(bot);
     return setting ? settings[setting] : settings
