@@ -10,11 +10,6 @@ export const parseDecimals = (num: number, places = decimals) => {
 }
 
 export const getSupply = async () => {
-    const supply = await createQueryBuilder("account").select('*').getRawMany();
-    let x = 0;
-
-    supply.map((v, i) => {
-        x = x + v.balance;
-    })
-    return x;
+    let { sum } = await Account.createQueryBuilder("account").select('SUM(account.balance)', 'sum').getRawOne();
+    return sum;
 }
