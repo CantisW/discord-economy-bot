@@ -1,16 +1,20 @@
 import { CommandInteraction } from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 import { getConfig } from "../util/bot.js";
-import { checkIfAccountExists, createAccount, getAccountBalance } from "../util/users.js";
+import {
+    checkIfAccountExists,
+    createAccount,
+    getAccountBalance,
+} from "../util/users.js";
 import { ERRORS } from "../util/errors.js";
 
 let config = getConfig();
+let ticker = config.ticker;
 
 @Discord()
 export class Account {
-
-    @Slash("account", { description: "Create or check your account balance."})
-    account(
+    @Slash("account", { description: "Create or check your account balance." })
+    async account(
         @SlashChoice("create", "create")
         @SlashChoice("balance", "bal")
         @SlashOption("action", { type: "STRING" })
@@ -19,21 +23,22 @@ export class Account {
     ) {
         switch (action) {
             case "create":
-                if (checkIfAccountExists(interaction.user.id)) {
-                    interaction.reply(ERRORS.ACCOUNT_ALREADY_EXISTS)
+                if (await checkIfAccountExists(interaction.user.id)) {
+                    interaction.reply(ERRORS.ACCOUNT_ALREADY_EXISTS);
                 } else {
-                    createAccount(interaction.user.id);
-                    interaction.reply("Your account has been created!")
+                    createAccount(interaction.user.id).then(() => {
+                        interaction.reply("Your account has been created!");
+                    });
                 }
                 break;
             case "bal":
-                if (checkIfAccountExists(interaction.user.id)) {
-                    let bal = getAccountBalance(interaction.user.id);
-                    interaction.reply(`Your account balance is ${bal}`)
+                if (await checkIfAccountExists(interaction.user.id)) {
+                    let bal = await getAccountBalance(interaction.user.id);
+                    interaction.reply(`Your account balance is ${bal} ${ticker}.`);
                 } else {
                     interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
                 }
                 break;
         }
-    }
+    };
 }
