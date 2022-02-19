@@ -14,11 +14,12 @@
     "@discordx/importer": "^1.1.2",
     "discord.js": "^13.6.0",
     "discordx": "^9.2.2",
+    "dotenv": "^16.0.0",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.5.0",
-    "typeorm": "^0.2.41"
+    "typeorm": "^0.2.42"
   },
   "devDependencies": {
     "@types/node": "^17.0.17",
