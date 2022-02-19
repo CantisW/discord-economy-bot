@@ -1,14 +1,21 @@
 import "reflect-metadata";
+import "dotenv/config";
 
 import { Client } from "discordx";
 import { Intents, Interaction, Message } from "discord.js";
 import { dirname, importx } from "@discordx/importer";
 import { createConnection } from "typeorm";
 
+import { returnSetting } from "./util/bot.js";
 import config from "./data/bot.json" assert { type: "json" };
-const { token, prefix, guildId } = config;
+let { token, prefix, guildId } = config;
 
-createConnection().catch(e => console.log(e));
+createConnection().then(() => console.log("Connected to DB!")).catch(e => console.log(e));
+
+if (returnSetting("production") !== "production") {
+    token = process.env.TOKEN || '';
+    guildId = process.env.GUILDID || '';
+}
 
 export const client = new Client({
     simpleCommand: {
