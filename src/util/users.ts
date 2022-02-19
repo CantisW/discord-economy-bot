@@ -1,39 +1,28 @@
 import fs from "fs";
-import { getUsers } from "./bot.js";
+import { resolve } from "path/posix";
+import { Account } from "../entity/Account.js";
+import { ERRORS } from "./errors.js";
 import { IAccount } from "./types.js";
 
-export const createAccount = (id: string) => {
-    let users = getUsers();
-    let obj: IAccount = {"address":id,"balance":0};
-
-    users.accounts.push(obj);
-
-    fs.writeFile('./src/data/accounts.json', JSON.stringify(users, null, 2), (err) => {
-        if (err) console.log(err);
+export const createAccount = (id: string): Promise<boolean> => {
+    return new Promise(async (resolve, reject) => {
+        let obj: IAccount = { address: id, balance: 0 };
+        try {
+            await Account.create(obj).save();
+            resolve(true);
+        } catch (err) {
+            console.log(err);
+            reject(ERRORS.ACCOUNT_CANNOT_CREATE);
+        }
     })
 }
 
-export const checkIfAccountExists = (id: string) => {
-    let users = getUsers();
-    let length = Object.keys(users.accounts).length;
-
-    if (length == 0) return false;
-    
-    for (let i = 0; i<length; i++) {
-        if (users.accounts[i].address = id) {
-            return true;
-        }
-    }
-    return false;
+export const checkIfAccountExists = async (id: string) => {
+    const user = await Account.findOne({ address: id })
+    if (user) return true;
 }
 
-export const getAccountBalance = (id: string) => {
-    let users = getUsers();
-    let length = Object.keys(users.accounts).length;
-    
-    for (let i = 0; i<length; i++) {
-        if (users.accounts[i].address = id) {
-            return users.accounts[i].balance;
-        }
-    }
+export const getAccountBalance = async (id: string) => {
+    const user = await Account.findOne({ address: id });
+    if (user) return user.balance;
 }
