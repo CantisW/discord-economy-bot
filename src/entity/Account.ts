@@ -1,8 +1,8 @@
-import { BaseEntity, Column, CreateDateColumn, Entity } from "typeorm";
+import { BaseEntity, PrimaryColumn, Column, CreateDateColumn, Entity } from "typeorm";
 
 @Entity()
 export class Account extends BaseEntity {
-    @Column()
+    @PrimaryColumn()
     address: string;
 
     @Column()
