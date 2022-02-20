@@ -12,6 +12,7 @@ export interface IConfig {
 }
 
 export interface ISettings {
+    [key: string]: string,
     prefix: string,
     token: string,
     guildId: string
@@ -20,4 +21,10 @@ export interface ISettings {
 export interface IAccount {
     address: string,
     balance: number
+}
+
+export interface ICooldown {
+    command: string,
+    time: number,
+    author: string
 }
