@@ -24,10 +24,13 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Environment Information**
-| Node Version | v16.14.0  | <!-- run `node -v` to get -->
-|---------------|-----------|
-| OS                 | Windows |       
-| Bot Version    | v0.1.0      | <!-- check package.json for this -->
+
+| Node Version | v16.14.0 |
+|--------------|----------|
+| OS           | Windows  |
+| Bot Version  | v0.1.0   |
+<!-- run `node -v` to get node version -->
+<!-- check package.json for bot version -->
 
 **Additional context**
 Add any other context about the problem here.
