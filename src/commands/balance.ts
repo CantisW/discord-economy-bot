@@ -7,19 +7,23 @@ import { getAccountBalance } from "../util/users.js";
 
 @Discord()
 export class Balance {
-    @Slash("balance", { description: "See someone else's balance." })
+    @Slash("balance", { description: "See your own or someone else's balance." })
     async balance(
-        @SlashOption("user", { type: "STRING", description: "Who? [ UserId or @User ]" })
+        @SlashOption("user", { type: "STRING", description: "Who? [ UserId or @User ]", required: false })
         user: string,
         interaction: CommandInteraction
     ) {
         let { ticker, exchangeRate, currency } = getConfig();
+        if (!user) {
+            let bal = await getAccountBalance(interaction.user.id);
+            return interaction.reply(`Your account balance is ${bal} ${ticker}.`);
+        }
 
         let parsed = sanitizeId(user);
         let bal = await getAccountBalance(parsed);
         if (!bal) {
-            return interaction.reply(ERRORS.BALANCE_CANNOT_RETRIEVE)
+            return interaction.reply(ERRORS.BALANCE_CANNOT_RETRIEVE);
         }
-        interaction.reply(`${parsed} has ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`)
+        interaction.reply(`${parsed} has ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`);
     }
 }
