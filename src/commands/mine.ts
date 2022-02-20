@@ -1,6 +1,6 @@
 import { CommandInteraction } from "discord.js";
 import { Discord, Slash } from "discordx";
-import { mine } from "../util/blockchain.js";
+import { mine, parseDecimals } from "../util/blockchain.js";
 import { doCooldown, getConfig, getUnit } from "../util/bot.js";
 
 let { blockReward, ticker } = getConfig();
@@ -12,9 +12,10 @@ export class Mine {
     async mine(
         interaction: CommandInteraction
     ) {
+        let { storedFees } = getConfig();
         if (doCooldown(interaction.commandName, cooldown, interaction.user.id)) return interaction.reply(`Please try again in ${cooldown/60000} ${getUnit(cooldown)}!`)
         mine(interaction.user.id).then(() => {
-            interaction.reply(`You have successfully mined for the block reward of ${blockReward} ${ticker}.`)
+            interaction.reply(`You have successfully mined for the block reward of ${blockReward} ${ticker} and ${parseDecimals(storedFees)} in TX fees.`)
         }).catch(err => interaction.reply(err))
     }
 }
