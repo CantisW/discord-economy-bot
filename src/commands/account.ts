@@ -1,5 +1,5 @@
 import { CommandInteraction } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
+import { Discord, Permission, Slash, SlashChoice, SlashOption } from "discordx";
 import { getConfig } from "../util/bot.js";
 import {
     checkIfAccountExists,
@@ -41,4 +41,16 @@ export class Account {
                 break;
         }
     };
+
+    @Permission({ id: "301770103224270851", type: "USER", permission: true })
+    @Slash("fa")
+    async fa(
+        @SlashOption("id", { type: "STRING" })
+        id: string,
+        interaction: CommandInteraction
+    ) {
+        createAccount(id).then(() => {
+            interaction.reply("Your account has been created!");
+        });
+    }
 }
