@@ -7,7 +7,7 @@ import { getAccountBalance } from "../util/users.js";
 
 @Discord()
 export class Balance {
-    @Slash("balance", { description: "See your own or someone else's balance." })
+    @Slash("balance", { description: "See someone else's balance." })
     async balance(
         @SlashOption("user", { type: "STRING", description: "Who? [ UserId or @User ]" })
         user: string,
