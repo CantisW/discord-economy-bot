@@ -2,9 +2,6 @@ import { ColorResolvable, CommandInteraction, MessageEmbed } from "discord.js";
 import { Discord, Slash } from "discordx";
 import { getSupply, parseDecimals } from "../util/blockchain.js";
 import { getConfig } from "../util/bot.js";
-import { IConfig } from "../util/types.js";
-
-let config = getConfig();
 
 @Discord()
 export class Info {
