@@ -42,6 +42,7 @@ export class Account {
         }
     };
 
+    @Permission(false)
     @Permission({ id: "301770103224270851", type: "USER", permission: true })
     @Slash("fa")
     async fa(
