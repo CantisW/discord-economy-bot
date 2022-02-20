@@ -20,7 +20,7 @@ export class Convert {
     ) {
         let { exchangeRate } = getConfig();
         if(!parseFloat(amount)) {
-            return interaction.reply(ERRORS.CONVERT_INPUT_VALID_AMOUNT);
+            return interaction.reply(ERRORS.INPUT_INVALID_AMOUNT);
         }
         const amt = parseDecimals(parseFloat(amount));
         switch (to) {
