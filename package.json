@@ -4,17 +4,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore ./data/ --experimental-modules --experimental-json-modules ."
+    "start": "node --experimental-modules --experimental-json-modules ."
   },
   "type": "module",
   "author": "Santeeisweird9",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [],
   "description": "",
   "dependencies": {
     "discord.js": "^13.5.1",
     "dotenv": "^12.0.1",
-    "express": "^4.17.2",
-    "nodemon": "^2.0.15"
+    "express": "^4.17.2"
   }
 }
