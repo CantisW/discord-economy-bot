@@ -12,7 +12,7 @@ export const parseDecimals = (num: number, places = decimals) => {
 
 export const getSupply = async (): Promise<number> => {
     let { sum } = await Account.createQueryBuilder("account").select('SUM(account.balance)', 'sum').getRawOne();
-    console.log(typeof sum);
+    sum = parseFloat(sum);
     return sum;
 }
 
@@ -20,11 +20,6 @@ export const mine = (id: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
         let user = await Account.findOne({ address: id });
         let supply = await getSupply();
-        console.log(typeof supply)
-        console.log(supply)
-        console.log(typeof blockReward)
-        console.log(blockReward)
-        console.log(supply+blockReward)
         if (!user) return reject(ERRORS.ACCOUNT_DOES_NOT_EXIST);
         if (parseDecimals((supply + blockReward)) > maxSupply) return reject(ERRORS.SUPPLY_WILL_BE_EXCEEDED);
         try {
