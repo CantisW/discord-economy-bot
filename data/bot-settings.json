@@ -4,6 +4,6 @@
   "status":"The decentralized currency of Minecraft",
   "allow_competition":false,
   "disable_botting":true,
-  "environment":"dev"
+  "environment":"production"
 }
   
