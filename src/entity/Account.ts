@@ -5,7 +5,7 @@ export class Account extends BaseEntity {
     @PrimaryColumn()
     address: string;
 
-    @Column()
+    @Column({ type: 'float' })
     balance: number;
 
     @CreateDateColumn()
