@@ -1,7 +1,8 @@
 import fs from "fs";
-import { IConfig, ICooldown, ISettings } from "./types";
+import { IConfig, ISettings, ISharedArray } from "./types";
 
-let cooldowns: ICooldown[] = [];
+let cooldowns: ISharedArray[] = [];
+const usersArray: ISharedArray[] = [];
 
 export const getConfig = (): IConfig => {
     let config = fs.readFileSync("./src/data/settings.json","utf-8");
@@ -42,13 +43,13 @@ export const sanitizeId = (id: string) => {
  */
 export const doCooldown = (command: string, time: number, author: string) => {
     let found = false;
-    cooldowns.forEach((v, i) => {
+    cooldowns.forEach((v) => {
         if (v.command === command && v.author === author) {
             found = true;
         }
     })
     if (found) return true;
-    let obj: ICooldown = { command: command, time: time, author: author };
+    let obj: ISharedArray = { command: command, time: time, author: author };
     cooldowns.push(obj);
     setTimeout(() => {
         cooldowns = cooldowns.filter(v => v !== obj)
@@ -59,4 +60,44 @@ export const doCooldown = (command: string, time: number, author: string) => {
 export const getUnit = (cooldown: number) => {
     if (cooldown >= 60000) return "minutes";
     return "seconds";
+}
+
+/**
+ * Returns an index number OR create one. Used for pagination.
+ * @param user 
+ * @param command 
+ * @returns number
+ */
+export const getUserIndex = (user: string, command: string) => {
+    let obj: ISharedArray = { command: command, time: 0, author: user }
+    let found = false;
+    let index = 0;
+    usersArray.forEach((v) => {
+        if (v.author === user && v.command === command) {
+            found = true
+            index = v.time;
+        }
+    })
+    if (found) return index;
+    usersArray.push(obj)
+    return 0;
+}
+
+/**
+ * Sets an index number. Used for pagination.
+ * @param user 
+ * @param command 
+ * @returns number
+ */
+ export const setUserIndex = (user: string, command: string, index: number) => {
+    let obj: ISharedArray = { command: command, time: 0, author: user }
+    if (index === 0) {
+        usersArray.filter(v => v !== obj)
+    }
+    usersArray.forEach((v) => {
+        if (v.author === user && v.command === command) {
+            v.time = index;
+        }
+    })
+    return true;
 }
