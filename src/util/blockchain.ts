@@ -98,3 +98,13 @@ export const hash = (timestamp: number) => {
     let nonce = Math.random() * 99999999
     return crypto.createHash('md5').update(`${timestamp*nonce}`).digest("hex");
 }
+
+export const returnOrderedBlockchain = async () => {
+    let tx = await Transaction.createQueryBuilder("transaction").select("*").orderBy("transaction.timestamp", "DESC").getRawMany();
+    return tx;
+}
+
+export const getTransactionInfo = async (txid: string) => {
+    const tx = await Transaction.findOne({ txid: txid })
+    return tx;
+}
