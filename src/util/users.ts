@@ -1,4 +1,5 @@
 import fs from "fs";
+import { MoreThan } from "typeorm";
 import { Account } from "../entity/Account.js";
 import { sanitizeId } from "./bot.js";
 import { ERRORS } from "./errors.js";
@@ -25,4 +26,9 @@ export const checkIfAccountExists = async (id: string) => {
 export const getAccountBalance = async (id: string) => {
     const user = await Account.findOne({ address: id });
     if (user) return user.balance;
+}
+
+export const returnOrderedUsers = async () => {
+    const user = await Account.createQueryBuilder("account").select('*').where("account.balance > 0").orderBy('account.balance', 'DESC').getRawMany();
+    return user;
 }
