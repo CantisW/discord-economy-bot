@@ -23,7 +23,7 @@ export interface IAccount {
     balance: number
 }
 
-export interface ICooldown {
+export interface ISharedArray {
     command: string,
     time: number,
     author: string
