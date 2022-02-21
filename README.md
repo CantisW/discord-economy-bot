@@ -2,7 +2,18 @@
 
 A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any similar game).
 
-index.js contains all of the main code. You do not need to change anything in here.
+# To Use
+
+* Clone this repository (`git clone https://github.com/CantisW/discord-economy-bot`)
+* Open Visual Studio Code or similar and open a terminal
+* Type in `npm i` and wait for dependencies to install
+* Type in `npm start`
+
+Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher) and discord.ts.
+
+# Settings
+
+All the settings are located in ./data/*.
 
 user-data.json contains all user data. Don't touch this unless you like to manually adjust balances.
 
@@ -13,17 +24,6 @@ blockchain.json is just the blockchain data. If you want to "disable" this, then
 bot-settings.json are bot settings. Put your prefix, bot token, and custom status here.
 
 app.js is the API app. (Scroll down for more info)
-
-# To Use
-
-* Open Visual Studio Code or similar.
-* Open terminal.
-* Type in "node --experimental-modules --experimental-json-modules ." on index.js without quotes.
-* 
-Optionally, you can go into package.json and replace "start" under "scripts" with `node --experimental-modules --experimental-json-modules .`
-This allows you to type in "npm start" instead of the longer version above.
-
-Enjoy! Make sure it is set up and you have node.js and @guildedjs/guilded.js (v1.1.5 or higher).
 
 # API Setup
 
