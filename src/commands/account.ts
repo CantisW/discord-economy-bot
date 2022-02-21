@@ -7,9 +7,7 @@ import {
     getAccountBalance,
 } from "../util/users.js";
 import { ERRORS } from "../util/errors.js";
-
-let config = getConfig();
-let ticker = config.ticker;
+import { parseDecimals } from "../util/blockchain.js";
 
 @Discord()
 export class Account {
@@ -21,6 +19,7 @@ export class Account {
         action: string,
         interaction: CommandInteraction
     ) {
+        let { ticker, exchangeRate, currency } = getConfig();
         switch (action) {
             case "create":
                 if (await checkIfAccountExists(interaction.user.id)) {
@@ -32,12 +31,9 @@ export class Account {
                 }
                 break;
             case "bal":
-                if (await checkIfAccountExists(interaction.user.id)) {
-                    let bal = await getAccountBalance(interaction.user.id);
-                    interaction.reply(`Your account balance is ${bal} ${ticker}.`);
-                } else {
-                    interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
-                }
+                let bal = await getAccountBalance(interaction.user.id);
+                if (!bal) return interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
+                interaction.reply(`Your account balance is ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
                 break;
         }
     };

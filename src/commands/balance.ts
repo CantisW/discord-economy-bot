@@ -16,7 +16,8 @@ export class Balance {
         let { ticker, exchangeRate, currency } = getConfig();
         if (!user) {
             let bal = await getAccountBalance(interaction.user.id);
-            return interaction.reply(`Your account balance is ${bal} ${ticker}.`);
+            if (!bal) return interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
+            return interaction.reply(`Your account balance is ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
         }
 
         let parsed = sanitizeId(user);
@@ -24,6 +25,6 @@ export class Balance {
         if (!bal) {
             return interaction.reply(ERRORS.BALANCE_CANNOT_RETRIEVE);
         }
-        interaction.reply(`${parsed} has ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`);
+        interaction.reply(`${parsed} has ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
     }
 }
