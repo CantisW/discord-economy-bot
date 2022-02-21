@@ -12,7 +12,7 @@ export class Convert {
     convert(
         @SlashChoice(`${ticker}`, "coin")
         @SlashChoice(`${currency}`, "currency")
-        @SlashOption("to", { type: "STRING", description: `Convert to what? [ ${ticker} | ${currency}]` })
+        @SlashOption("from", { type: "STRING", description: `Convert from what? [ ${ticker} | ${currency}]` })
         to: string,
         @SlashOption("amount", { type: "STRING", description: "How much to convert? [ number ]"})
         amount: string,
