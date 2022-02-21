@@ -10,4 +10,7 @@ export const ERRORS = {
     TRANSACTION_AMOUNT_INVALID: "You do not have enough currency!",
     TRANSACTION_CANNON_TRANSFER_TO_SELF: "You cannot transfer to yourself!",
     TRANSACTION_CANNOT_SEND_ZERO: "You can't send nothing!",
+    LEADERBOARD_CANNOT_HAVE_MULTIPLE: "Don't have more than one leaderboard open!",
+    TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE: "Don't have more than one transaction list open!",
+    TRANSACTION_VIEW_CANNOT_RETRIEVE: "This transaction doesn't exist!",
 }
