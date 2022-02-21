@@ -13,7 +13,7 @@ let { coinName, ticker } = getConfig();
 
 createConnection().then(() => console.log("Connected to DB!")).catch(e => console.log(e));
 
-if (returnSetting("production") !== "production") {
+if (returnSetting("environment") !== "production") {
     token = process.env.TOKEN || '';
     guildId = process.env.GUILDID || '';
 }
