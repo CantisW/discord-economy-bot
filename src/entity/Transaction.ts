@@ -17,7 +17,7 @@ export class Transaction extends BaseEntity {
     @Column({ type: 'float' })
     amount: number;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ type: 'timestamp' })
     timestamp: Date;
 
     @Column({ type: 'float' })
