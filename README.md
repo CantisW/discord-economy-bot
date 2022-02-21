@@ -9,7 +9,7 @@ A cryptocurrency-styled bot that you can change to your liking for Minecraft ser
 * Type in `npm i` and wait for dependencies to install
 * Type in `npm start`
 
-Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher) and discord.ts.
+Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher).
 
 # Settings
 
