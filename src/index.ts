@@ -5,10 +5,11 @@ import { Client } from "discordx";
 import { Intents, Interaction, Message } from "discord.js";
 import { dirname, importx } from "@discordx/importer";
 import { createConnection } from "typeorm";
-
-import { returnSetting } from "./util/bot.js";
+import { getConfig, returnSetting } from "./util/bot.js";
 import config from "./data/bot.json" assert { type: "json" };
-let { token, prefix, guildId } = config;
+
+let { token, prefix, status, guildId } = config;
+let { coinName, ticker } = getConfig();
 
 createConnection().then(() => console.log("Connected to DB!")).catch(e => console.log(e));
 
@@ -37,6 +38,7 @@ client.once("ready", async () => {
         global: { log: true },
     });
     await client.initApplicationPermissions(true);
+    client!.user!.setPresence({ activities: [{ name: `${coinName} (${ticker}) | ${status}` }], status: 'online' });
     console.log("Ready!");
 });
 
