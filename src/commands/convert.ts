@@ -19,17 +19,13 @@ export class Convert {
         interaction: CommandInteraction
     ) {
         let { exchangeRate } = getConfig();
-        if(!parseFloat(amount)) {
-            return interaction.reply(ERRORS.INPUT_INVALID_AMOUNT);
-        }
+        if(!parseFloat(amount)) return interaction.reply(ERRORS.INPUT_INVALID_AMOUNT);
         const amt = parseDecimals(parseFloat(amount));
         switch (to) {
             case "coin":
-                interaction.reply(`${amt} ${ticker} is ${parseDecimals(amt * exchangeRate)} ${currency}.`);
-                break;
+                return interaction.reply(`${amt} ${ticker} is ${parseDecimals(amt * exchangeRate)} ${currency}.`);
             case "currency":
-                interaction.reply(`${amt} ${currency} is ${parseDecimals(amt / exchangeRate)} ${ticker}.`);
-                break;
+                return interaction.reply(`${amt} ${currency} is ${parseDecimals(amt / exchangeRate)} ${ticker}.`);
         }
     }
 }

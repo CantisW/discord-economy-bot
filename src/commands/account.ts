@@ -23,18 +23,16 @@ export class Account {
         switch (action) {
             case "create":
                 if (await checkIfAccountExists(interaction.user.id)) {
-                    interaction.reply(ERRORS.ACCOUNT_ALREADY_EXISTS);
+                    return interaction.reply(ERRORS.ACCOUNT_ALREADY_EXISTS);
                 } else {
                     createAccount(interaction.user.id).then(() => {
-                        interaction.reply("Your account has been created!");
+                        return interaction.reply("Your account has been created!");
                     });
                 }
-                break;
             case "bal":
                 let bal = await getAccountBalance(interaction.user.id);
                 if (!bal) return interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
-                interaction.reply(`Your account balance is ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
-                break;
+                return interaction.reply(`Your account balance is ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
         }
     };
 
