@@ -5,40 +5,44 @@ let cooldowns: ISharedArray[] = [];
 const usersArray: ISharedArray[] = [];
 
 export const getConfig = (): IConfig => {
-    let config = fs.readFileSync("./src/data/settings.json","utf-8");
+    let config = fs.readFileSync("./src/data/settings.json", "utf-8");
     return JSON.parse(config);
-}
+};
 
 /**
  * Write to a certain config property.
- * @param property 
- * @param write 
+ * @param property
+ * @param write
  */
 export const WriteToConfig = (property: string, write: string | number) => {
-    let config = getConfig()
+    let config = getConfig();
 
     config[property] = write;
 
-    fs.writeFile("./src/data/settings.json", JSON.stringify(config, null, 2), (err) => {
-        if (err) console.log(err);
-    });
-}
+    fs.writeFile(
+        "./src/data/settings.json",
+        JSON.stringify(config, null, 2),
+        (err) => {
+            if (err) console.log(err);
+        }
+    );
+};
 
 export const returnSetting = (setting: string) => {
-    let bot = fs.readFileSync("./src/data/bot.json","utf-8");
+    let bot = fs.readFileSync("./src/data/bot.json", "utf-8");
     let settings = JSON.parse(bot);
-    return setting ? settings[setting] : settings
-}
+    return setting ? settings[setting] : settings;
+};
 
 export const sanitizeId = (id: string) => {
     return id.replace(/[\\<>@#&!]/g, "");
-}
+};
 
 /**
  * Checks for command cooldown. If false, make a cooldown.
- * @param command 
- * @param time 
- * @param author 
+ * @param command
+ * @param time
+ * @param author
  * @returns boolean
  */
 export const doCooldown = (command: string, time: number, author: string) => {
@@ -47,57 +51,57 @@ export const doCooldown = (command: string, time: number, author: string) => {
         if (v.command === command && v.author === author) {
             found = true;
         }
-    })
+    });
     if (found) return true;
     let obj: ISharedArray = { command: command, time: time, author: author };
     cooldowns.push(obj);
     setTimeout(() => {
-        cooldowns = cooldowns.filter(v => v !== obj)
-    }, time)
+        cooldowns = cooldowns.filter((v) => v !== obj);
+    }, time);
     return false;
-}
+};
 
 export const getUnit = (cooldown: number) => {
     if (cooldown >= 60000) return "minutes";
     return "seconds";
-}
+};
 
 /**
  * Returns an index number OR create one. Used for pagination.
- * @param user 
- * @param command 
+ * @param user
+ * @param command
  * @returns number
  */
 export const getUserIndex = (user: string, command: string) => {
-    let obj: ISharedArray = { command: command, time: 0, author: user }
+    let obj: ISharedArray = { command: command, time: 0, author: user };
     let found = false;
     let index = 0;
     usersArray.forEach((v) => {
         if (v.author === user && v.command === command) {
-            found = true
+            found = true;
             index = v.time;
         }
-    })
+    });
     if (found) return index;
-    usersArray.push(obj)
+    usersArray.push(obj);
     return 0;
-}
+};
 
 /**
  * Sets an index number. Used for pagination.
- * @param user 
- * @param command 
+ * @param user
+ * @param command
  * @returns number
  */
- export const setUserIndex = (user: string, command: string, index: number) => {
-    let obj: ISharedArray = { command: command, time: 0, author: user }
+export const setUserIndex = (user: string, command: string, index: number) => {
+    let obj: ISharedArray = { command: command, time: 0, author: user };
     if (index === 0) {
-        usersArray.filter(v => v !== obj)
+        usersArray.filter((v) => v !== obj);
     }
     usersArray.forEach((v) => {
         if (v.author === user && v.command === command) {
             v.time = index;
         }
-    })
+    });
     return true;
-}
+};
