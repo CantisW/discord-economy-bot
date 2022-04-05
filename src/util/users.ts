@@ -49,6 +49,17 @@ export const getLocale = async (id: string) => {
     return { "localeKey": file.locale, "localeName": file.localeName };
 }
 
+export const getAllLocales = async () => {
+    let object = [];
+    const files = fs.readdirSync(localesPath).filter(file => file.endsWith(".ts"));
+
+    for (const file in files) {
+        const localeFile = await import(`../locale/${files[file]}`);
+        object.push({ "localeKey": localeFile.locale, "localeName": localeFile.localeName })
+    }
+    return object;
+}
+
 export const changeLocale = async (id: string, locale: string) => {
     return new Promise(async (resolve, reject) => {
         const locales = fs.readdirSync(localesPath);
