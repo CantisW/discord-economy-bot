@@ -45,6 +45,8 @@ export const STRINGS = {
     LEADERBOARD_DESC_FORWARD: (index: number, to: number) => `La lista de ricos mundiales (monstrando ${index + 2}-${to + 1})`,
     LEADERBOARD_DESC_BACK: (to: number) => `La lista de ricos mundiales (monstrando ${to + 1}-${to + 10})`,
     LEADERBOARD_VALUE: (value: string) => `${value} del suministro total.`,
+    LOCALES_LIST_TITLE: "Idiomas regionales",
+    LOCALES_LIST_DESC: "Lista de idiomas",
     TRANSACTION_LIST_TITLE: "Lista de transacciones",
     TRANSACTION_LIST_DESC: "Lista de transacciones recientes (mostrando 1-10)",
     TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) => `Lista de transacciones recientes (mostrando ${index + 2}-${to + 1})`,

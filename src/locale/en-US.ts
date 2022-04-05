@@ -44,6 +44,8 @@ export const STRINGS = {
     LEADERBOARD_DESC_FORWARD: (index: number, to: number) => `The Global Rich List (showing ${index + 2}-${to + 1})`,
     LEADERBOARD_DESC_BACK: (to: number) => `The Global Rich List (showing ${to + 1}-${to + 10})`,
     LEADERBOARD_VALUE: (value: string) => `${value} of total supply.`,
+    LOCALES_LIST_TITLE: "Locales List",
+    LOCALES_LIST_DESC: "List of locales",
     TRANSACTION_LIST_TITLE: "Transaction List",
     TRANSACTION_LIST_DESC: "List of recent transactions (showing 1-10)",
     TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) => `List of recent transactions (showing ${index + 2}-${to + 1})`,

@@ -45,6 +45,8 @@ export const STRINGS = {
     LEADERBOARD_DESC_FORWARD: (index: number, to: number) => `グローバルリッチリスト（表示中 ${index + 2}-${to + 1})`,
     LEADERBOARD_DESC_BACK: (to: number) => `グローバルリッチリスト（表示中 ${to + 1}-${to + 10})`,
     LEADERBOARD_VALUE: (value: string) => `${value} 総供給の。`,
+    LOCALES_LIST_TITLE: "ロケールリスト",
+    LOCALES_LIST_DESC: "ロケールのリスト",
     TRANSACTION_LIST_TITLE: "トランザクションリスト",
     TRANSACTION_LIST_DESC: "最近の取引のリスト (1-10を表示)",
     TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) => `最近の取引のリスト（表示中 ${index + 2}-${to + 1})`,
