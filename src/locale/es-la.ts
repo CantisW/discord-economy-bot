@@ -62,5 +62,5 @@ export const STRINGS = {
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
         `Has minado con éxito la recompensa del bloque de ${blockReward} ${ticker} y has conseguido ${parsedFees} en tarifas de transacción.`,
     LOCALE_CHANGED: "¡Has cambiado tu idioma con éxito!",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} [${locale}]. Creado por ${credits}.`,
+    CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} [${locale}].\nCreado por ${credits}.`,
 }

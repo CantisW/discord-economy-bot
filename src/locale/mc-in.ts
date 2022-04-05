@@ -62,5 +62,5 @@ export const STRINGS = {
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
         `-.-- --- ..- / .... .- ...- . / ... ..- -.-. -.-. . ... ... ..-. ..- .-.. .-.. -.-- / -- .. -. . -.. / ..-. --- .-. / - .... . / -... .-.. --- -.-. -.- / .-. . .-- .- .-. -.. / --- ..-. ${blockReward} ${ticker} .- -. -.. ${parsedFees} .. -. / - -..- / ..-. . . ...`,
     LOCALE_CHANGED: "-.-- --- ..- .-. / .-.. --- -.-. .- .-.. . / .... .- ... / ... ..- -.-. -.-. . ... ... ..-. ..- .-.. .-.. -.-- / -... . . -. / -.-. .... .- -. --. . -.. -.-.--",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `-.-- --- ..- .-. / -.-. ..- .-. .-. . -. - / .-.. --- -.-. .- .-.. . / .. ... / ... . - / - --- / ${localeName} [${locale}] / -.-. .-. . .- - . -.. / -... -.-- / ${credits}`,
+    CURRENT_LOCALE: (localeName: string, locale: string) => `-.-- --- ..- .-. / -.-. ..- .-. .-. . -. - / .-.. --- -.-. .- .-.. . / .. ... / ... . - / - --- / ${localeName} [${locale}]\n-.-. .-. . .- - . -.. / -... -.-- / ${credits}`,
 }
