@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { Account } from "../entity/Account.js";
 import { Transaction } from "../entity/Transaction.js";
 import { getConfig, sanitizeId, WriteToConfig } from "./bot.js";
-import { ERRORS } from "./errors.js";
+import { lang } from "./users.js";
 
 const { decimals, blockReward, maxSupply } = getConfig();
 
@@ -32,9 +32,9 @@ export const mine = (id: string): Promise<boolean> => {
         let user = await Account.findOne({ address: id });
         let supply = await getSupply();
         let { storedFees } = getConfig();
-        if (!user) return reject(ERRORS.ACCOUNT_DOES_NOT_EXIST);
+        if (!user) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, id));
         if (parseDecimals(supply + blockReward) > maxSupply)
-            return reject(ERRORS.SUPPLY_WILL_BE_EXCEEDED);
+            return reject(await lang(`SUPPLY_WILL_BE_EXCEEDED`, id));
         try {
             user.balance = parseDecimals(
                 user.balance + blockReward + storedFees
@@ -42,7 +42,7 @@ export const mine = (id: string): Promise<boolean> => {
             user.save();
         } catch (err) {
             console.log(err);
-            reject(ERRORS.GENERIC_ERROR);
+            reject(await lang(`GENERIC_ERROR`, id));
         }
         WriteToConfig("storedFees", 0);
         resolve(true);
@@ -62,17 +62,18 @@ export const MakeTransaction = async (
         let recepientAccount = await Account.findOne({
             address: sanitizeId(recepient),
         });
-        if (!senderAccount) return reject(ERRORS.ACCOUNT_DOES_NOT_EXIST);
-        if (!recepientAccount) return reject(ERRORS.ACCOUNT_CANNOT_RETRIEVE);
+        if (!senderAccount) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, sender));
+        if (!recepientAccount) return reject(await lang(`ACCOUNT_CANNOT_RETRIEVE`, sender));
 
         let timestamp = Date.now();
 
         amount = parseDecimals(amount);
-        if (amount === 0) return reject(ERRORS.TRANSACTION_CANNOT_SEND_ZERO);
+        
+        if (amount === 0) return reject(await lang(`TRANSACTION_CANNOT_SEND_ZERO`, sender));
         if (amount > senderAccount.balance + txFee)
-            return reject(ERRORS.TRANSACTION_AMOUNT_INVALID);
-        if (sender === recepient)
-            return reject(ERRORS.TRANSACTION_CANNON_TRANSFER_TO_SELF);
+            return reject(await lang(`TRANSACTION_AMOUNT_INVALID`, sender));
+        if (sanitizeId(sender) === sanitizeId(recepient))
+            return reject(await lang(`TRANSACTION_CANNOT_TRANSFER_TO_SELF`, sender));
 
         senderAccount.balance = parseDecimals(
             senderAccount.balance - amount - txFee

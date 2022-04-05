@@ -1,5 +1,6 @@
 import fs from "fs";
-import { IConfig, ISettings, ISharedArray } from "./types";
+import { IConfig, ISharedArray } from "./types";
+import { lang } from "./users.js";
 
 let cooldowns: ISharedArray[] = [];
 const usersArray: ISharedArray[] = [];
@@ -61,9 +62,9 @@ export const doCooldown = (command: string, time: number, author: string) => {
     return false;
 };
 
-export const getUnit = (cooldown: number) => {
-    if (cooldown >= 60000) return "minutes";
-    return "seconds";
+export const getUnit = async (cooldown: number, id: string) => {
+    if (cooldown >= 60000) return await lang("COOLDOWN_MINUTES", id);
+    return await lang("COOLDOWN_SECONDS", id);
 };
 
 /**
