@@ -1,6 +1,6 @@
 export const locale = "es-LA";
 export const localeName = "Español (Latinoamérica)";
-export const credits = "";
+export const credits = "CantisW";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `ERROR: ${key} no parece como existe o tal vez aún no está traducido.`,
@@ -62,5 +62,5 @@ export const STRINGS = {
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
         `Has minado con éxito la recompensa del bloque de ${blockReward} ${ticker} y has conseguido ${parsedFees} en tarifas de transacción.`,
     LOCALE_CHANGED: "¡Has cambiado tu idioma con éxito!",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} (${locale}).`,
+    CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} [${locale}]. Creado por ${credits}.`,
 }

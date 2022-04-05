@@ -1,6 +1,5 @@
 export const locale = "en-US";
 export const localeName = "English (United States)";
-export const credits = "";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `BUG: ${key} doesn't seem to exist.`,
@@ -62,5 +61,5 @@ export const STRINGS = {
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
         `You have successfully mined for the block reward of ${blockReward} ${ticker} and ${parsedFees} in TX fees.`,
     LOCALE_CHANGED: "Your locale has successfully been changed!",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `Your current locale is set to ${localeName} (${locale}).`,
+    CURRENT_LOCALE: (localeName: string, locale: string) => `Your current locale is set to ${localeName} [${locale}].`,
 }

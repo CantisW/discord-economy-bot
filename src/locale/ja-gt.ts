@@ -62,5 +62,5 @@ export const STRINGS = {
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
         `あなたは ${blockReward} ${ticker} 砂と ${parsedFees} の TX 料金の報酬のためにブロックを破壊することに成功しました。`,
     LOCALE_CHANGED: "ロケールが正常に変更されました。",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `現在のロケールはに設定されています ${localeName} (${locale}).`,
+    CURRENT_LOCALE: (localeName: string, locale: string) => `現在のロケールはに設定されています ${localeName} [${locale}].`,
 }
