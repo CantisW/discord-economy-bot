@@ -2,8 +2,7 @@ import { CommandInteraction } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { parseDecimals } from "../util/blockchain.js";
 import { sanitizeId, getConfig } from "../util/bot.js";
-import { ERRORS } from "../util/errors.js";
-import { getAccountBalance } from "../util/users.js";
+import { getAccountBalance, lang } from "../util/users.js";
 
 @Discord()
 export class Balance {
@@ -16,15 +15,17 @@ export class Balance {
         let { ticker, exchangeRate, currency } = getConfig();
         if (!user) {
             let bal = await getAccountBalance(interaction.user.id);
-            if (!bal) return interaction.reply(ERRORS.ACCOUNT_DOES_NOT_EXIST);
-            return interaction.reply(`Your account balance is ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
+            if (!bal) return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
+            let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`
+            return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [ calculated ]));
         }
 
         let parsed = sanitizeId(user);
         let bal = await getAccountBalance(parsed);
         if (!bal) {
-            return interaction.reply(ERRORS.BALANCE_CANNOT_RETRIEVE);
+            return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
         }
-        interaction.reply(`${parsed} has ${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`);
+        let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`
+        interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE_OTHER_USER`, interaction.user.id, [ parsed, calculated ]));
     }
 }

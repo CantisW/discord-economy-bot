@@ -2,14 +2,14 @@ import { CommandInteraction } from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 import { parseDecimals } from "../util/blockchain.js";
 import { getConfig } from "../util/bot.js";
-import { ERRORS } from "../util/errors.js";
+import { lang } from "../util/users.js";
 
 const { currency, ticker } = getConfig();
 
 @Discord()
 export class Convert {
     @Slash("convert", { description: "Get the exhcange rate between currencies!"})
-    convert(
+    async convert(
         @SlashChoice(`${ticker}`, "coin")
         @SlashChoice(`${currency}`, "currency")
         @SlashOption("from", { type: "STRING", description: `Convert from what? [ ${ticker} | ${currency}]` })
@@ -19,13 +19,17 @@ export class Convert {
         interaction: CommandInteraction
     ) {
         let { exchangeRate } = getConfig();
-        if(!parseFloat(amount)) return interaction.reply(ERRORS.INPUT_INVALID_AMOUNT);
+        if(!parseFloat(amount)) return interaction.reply(await lang(`INPUT_INVALID_AMOUNT`, interaction.user.id));
         const amt = parseDecimals(parseFloat(amount));
+
+        let calculatedToCoin = `${parseDecimals(amt * exchangeRate)} ${currency}`
+        let calculatedToCurrency = `${parseDecimals(amt / exchangeRate)} ${ticker}`
+
         switch (to) {
             case "coin":
-                return interaction.reply(`${amt} ${ticker} is ${parseDecimals(amt * exchangeRate)} ${currency}.`);
+                return interaction.reply(await lang(`CONVERT_AMOUNT_IS`, interaction.user.id, [ `${amt} ${ticker}`, calculatedToCoin ]));
             case "currency":
-                return interaction.reply(`${amt} ${currency} is ${parseDecimals(amt / exchangeRate)} ${ticker}.`);
+                return interaction.reply(await lang(`CONVERT_AMOUNT_IS`, interaction.user.id, [ `${amt} ${currency}`, calculatedToCurrency ]));
         }
     }
 }

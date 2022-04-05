@@ -9,8 +9,7 @@ import {
 import { ButtonComponent, Discord, Slash } from "discordx";
 import { getSupply, parseDecimals } from "../util/blockchain.js";
 import { getConfig, getUserIndex, setUserIndex } from "../util/bot.js";
-import { ERRORS } from "../util/errors.js";
-import { returnOrderedUsers } from "../util/users.js";
+import { lang, returnOrderedUsers } from "../util/users.js";
 
 const { coinName, ticker } = getConfig();
 
@@ -45,10 +44,10 @@ export class Leaderboard {
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Leaderboard`)
+            .setTitle(await lang("LEADERBOARD_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(`The Global Rich List (showing 1-10)`)
+            .setDescription(await lang("LEADERBOARD_DESC", interaction.user.id))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
@@ -64,11 +63,10 @@ export class Leaderboard {
         }
 
         for (let i = 0; i <= index; i++) {
+            let val = `${this.users[i].balance} ${ticker} (${parseDecimals((this.users[i].balance / this.supply) * 100)}%)`;
             embed.addFields({
                 name: `${this.users[i].address}`,
-                value: `${this.users[i].balance} ${ticker} (${parseDecimals(
-                    (this.users[i].balance / this.supply) * 100
-                )}% of total supply)`,
+                value: await lang("LEADERBOARD_VALUE", interaction.user.id, [ val ]),
             });
         }
         if (components) {
@@ -87,16 +85,16 @@ export class Leaderboard {
 
         if (index > this.length) {
             setUserIndex(interaction.user.id, "leaderboard", 0);
-            return interaction.reply(ERRORS.LEADERBOARD_CANNOT_HAVE_MULTIPLE);
+            return interaction.reply(await lang(`LEADERBOARD_CANNOT_HAVE_MULTIPLE`, interaction.user.id));
         }
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Leaderboard`)
+            .setTitle(await lang("LEADERBOARD_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
             .setDescription(
-                `The Global Rich List (showing ${index + 2}-${to + 1})`
+                await lang("LEADERBOARD_DESC_FORWARD", interaction.user.id, [ index, to ])
             )
             //.setThumbnail('')
             //.addField('', '', true)
@@ -131,7 +129,7 @@ export class Leaderboard {
 
         if (index - 10 < 9) {
             setUserIndex(interaction.user.id, "leaderboard", 0);
-            return interaction.reply(ERRORS.LEADERBOARD_CANNOT_HAVE_MULTIPLE);
+            return interaction.reply(await lang(`LEADERBOARD_CANNOT_HAVE_MULTIPLE`, interaction.user.id));
         }
 
         // complex maths
@@ -152,11 +150,11 @@ export class Leaderboard {
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Leaderboard`)
+            .setTitle(await lang("LEADERBOARD_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
             .setDescription(
-                `The Global Rich List (showing ${to + 1}-${to + 10})`
+                await lang("LEADERBOARD_DESC_BACK", interaction.user.id, [ to ])
             )
             //.setThumbnail('')
             //.addField('', '', true)

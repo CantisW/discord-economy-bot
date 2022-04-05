@@ -2,7 +2,7 @@ import { ButtonInteraction, ColorResolvable, CommandInteraction, MessageActionRo
 import { ButtonComponent, Discord, Slash, SlashOption } from "discordx";
 import { getTransactionInfo, MakeTransaction, returnOrderedBlockchain } from "../util/blockchain.js";
 import { getConfig, getUserIndex, setUserIndex } from "../util/bot.js";
-import { ERRORS } from "../util/errors.js";
+import { lang } from "../util/users.js";
 
 const { coinName, ticker } = getConfig();
 
@@ -33,9 +33,9 @@ export class Blockchain {
         interaction: CommandInteraction
     ) {
         let amt = parseFloat(amount);
-        if(!amt) return interaction.reply(ERRORS.INPUT_INVALID_AMOUNT);
-        await MakeTransaction(interaction.user.id, recepient, amt).then(() => {
-            interaction.reply("Transaction successful.")
+        if (!amt) return interaction.reply(await lang(`INPUT_INVALID_AMOUNT`, interaction.user.id));
+        await MakeTransaction(interaction.user.id, recepient, amt).then(async () => {
+            interaction.reply(await lang(`TRANSACTION_SUCCESS`, interaction.user.id))
         }).catch(err => interaction.reply(err))
     }
 
@@ -46,23 +46,23 @@ export class Blockchain {
         interaction: CommandInteraction
     ) {
         let tx = await getTransactionInfo(txid);
-        if (!tx) return interaction.reply(ERRORS.TRANSACTION_VIEW_CANNOT_RETRIEVE);
+        if (!tx) return interaction.reply(await lang(`TRANSACTION_VIEW_CANNOT_RECEIVE`, interaction.user.id));
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Viewing ${txid}`)
+            .setTitle(await lang("TRANSACTION_VIEW_TITLE", interaction.user.id, [ txid ]))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(`View a transaction`)
+            .setDescription(await lang("TRANSACTION_VIEW_DESC", interaction.user.id))
             .addFields(
-                { name: "Index", value: `${tx.index}` },
+                { name: await lang("TRANSACTION_VIEW_INDEX_LABEL", interaction.user.id), value: `${tx.index}` },
                 { name: "TXID", value: `${tx.txid}` },
-                { name: "Sender", value: `${tx.sender}` },
-                { name: "Recepient", value: `${tx.recepient}` },
-                { name: "Amount Sent", value: `${tx.amount}` },
-                { name: "Timestamp", value: `${tx.timestamp}` },
-                { name: "TX Fee", value: `${tx.txfee}` },
-                { name: "Previous Hash", value: `${tx.previousHash}` },
+                { name: await lang("TRANSACTION_VIEW_SENDER_LABEL", interaction.user.id), value: `${tx.sender}` },
+                { name: await lang("TRANSACTION_VIEW_RECIPIENT_LABEL", interaction.user.id), value: `${tx.recepient}` },
+                { name: await lang("TRANSACTION_VIEW_AMOUNT_SENT_LABEL", interaction.user.id), value: `${tx.amount}` },
+                { name: await lang("TRANSACTION_VIEW_TIMESTAMP_LABEL", interaction.user.id), value: `${tx.timestamp}` },
+                { name: await lang("TRANSACTION_VIEW_TX_FEE_LABEL", interaction.user.id), value: `${tx.txfee}` },
+                { name: await lang("TRANSACTION_VIEW_PREV_HASH_LABEL", interaction.user.id), value: `${tx.previousHash}` },
             )
             //.setThumbnail('')
             //.addField('', '', true)
@@ -84,10 +84,10 @@ export class Blockchain {
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Transactions List`)
+            .setTitle(await lang("TRANSACTION_LIST_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(`List of recent transactions (showing 1-10)`)
+            .setDescription(await lang("TRANSACTION_LIST_DESC", interaction.user.id))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
@@ -124,16 +124,16 @@ export class Blockchain {
 
         if (index > this.length) {
             setUserIndex(interaction.user.id, "list", 0);
-            return interaction.reply(ERRORS.TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE);
+            return interaction.reply(await lang(`TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE`, interaction.user.id));
         }
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Transactions List`)
+            .setTitle(await lang("TRANSACTION_LIST_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
             .setDescription(
-                `List of recent transactions (showing ${index + 2}-${to + 1})`
+                await lang("TRANSACTION_LIST_DESC_FORWARD", interaction.user.id)
             )
             //.setThumbnail('')
             //.addField('', '', true)
@@ -166,7 +166,7 @@ export class Blockchain {
 
         if (index - 10 < 9) {
             setUserIndex(interaction.user.id, "list", 0);
-            return interaction.reply(ERRORS.TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE);
+            return interaction.reply(await lang(`TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE`, interaction.user.id));
         }
 
         // complex maths
@@ -187,11 +187,11 @@ export class Blockchain {
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(`Transactions List`)
+            .setTitle(await lang("TRANSACTION_LIST_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
             .setDescription(
-                `List of recent transactions (showing ${to + 1}-${to + 10})`
+                await lang("TRANSACTION_LIST_DESC_BACK", interaction.user.id)
             )
             //.setThumbnail('')
             //.addField('', '', true)
