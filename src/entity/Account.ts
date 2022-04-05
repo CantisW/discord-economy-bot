@@ -8,6 +8,9 @@ export class Account extends BaseEntity {
     @Column({ type: 'float' })
     balance: number;
 
+    @Column({ default: 'en-en' })
+    locale: string;
+
     @CreateDateColumn()
     created: Date;
 }
