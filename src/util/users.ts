@@ -39,7 +39,7 @@ export const returnOrderedUsers = async () => {
 };
 
 export const getLocale = async (id: string) => {
-    let locale = "en-en"
+    let locale = "en-US"
 
     const user = await Account.findOne({ address: id });
     if (user) locale = user.locale;
@@ -74,7 +74,7 @@ export const changeLocale = async (id: string, locale: string) => {
 }
 
 export const lang = async (string: string, id: string, params?: any[]) => {
-    let locale = "en-en"
+    let locale = "en-US"
 
     const user = await Account.findOne({ address: id });
     if (user) locale = user.locale;
