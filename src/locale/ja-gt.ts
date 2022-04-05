@@ -1,5 +1,6 @@
-export const locale = "ja-gt"
-export const localeName = "日本 (Google Translated)"
+export const locale = "ja-GT";
+export const localeName = "日本 (Google Translated)";
+export const credits = "MacabreOverlord";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `エラー: ${key} 存在しないようです。`,

@@ -1,5 +1,6 @@
-export const locale = "mc-in"
-export const localeName = "-- --- .-. ... . / -.-. --- -.. ."
+export const locale = "mc-IN";
+export const localeName = "-- --- .-. ... . / -.-. --- -.. .";
+export const credits = "MacabreOverlord";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `-... ..- --.: ${key} -.. --- . ... -. .----. - / ... . . -- / - --- / . -..- .. ... - / --- .-. / -... . / - .-. .- -. ... .-.. .- - . -.. / -.-- . - .-.-.-`,

@@ -1,5 +1,6 @@
-export const locale = "en-en"
-export const localeName = "English"
+export const locale = "en-US";
+export const localeName = "English (United States)";
+export const credits = "";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `BUG: ${key} doesn't seem to exist.`,

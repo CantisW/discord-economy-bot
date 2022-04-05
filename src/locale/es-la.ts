@@ -1,5 +1,6 @@
-export const locale = "es-la"
-export const localeName = "Español (Latinoamérica)"
+export const locale = "es-LA";
+export const localeName = "Español (Latinoamérica)";
+export const credits = "";
 
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `ERROR: ${key} no parece como existe o tal vez aún no está traducido.`,
