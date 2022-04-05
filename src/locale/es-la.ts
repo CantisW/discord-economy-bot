@@ -4,8 +4,8 @@ export const localeName = "Español (Latinoamérica)"
 export const STRINGS = {
     _NO_LOCALE: (key: string) => `ERROR: ${key} no parece como existe o tal vez aún no está traducido.`,
     GENERIC_ERROR: "Algo inesperado ha sucedido. Por favor intenta de nuevo en un ratito.",
-    ACCOUNT_ALREADY_EXISTS: "¡Ya tiene una cuenta!",
-    ACCOUNT_DOES_NOT_EXIST: "¡No tiene una cuenta!",
+    ACCOUNT_ALREADY_EXISTS: "¡Usted ya tiene una cuenta!",
+    ACCOUNT_DOES_NOT_EXIST: "¡Este usuario no tiene una cuenta!",
     ACCOUNT_CANNOT_CREATE: "No se puede crear su cuenta. Por favor intenta de nuevo en un ratito.",
     ACCOUNT_CANNOT_RETRIEVE: "¡Esta cuente no existe!",
     BALANCE_CANNOT_RETRIEVE: "No se puede mostrar el saldo.",
