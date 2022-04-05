@@ -15,7 +15,7 @@ export const STRINGS = {
     INPUT_INVALID_AMOUNT: "¡Por favor, entre una cantidad válido!",
     SUPPLY_WILL_BE_EXCEEDED: "¡El suministro máximo ha sido alcanzado!",
     TRANSACTION_AMOUNT_INVALID: "¡No tiene suficiente moneda!",
-    TRANSACTION_CANNON_TRANSFER_TO_SELF: "¡No puedes transferir a su mismo!",
+    TRANSACTION_CANNON_TRANSFER_TO_SELF: "¡No se puede transferir a su mismo!",
     TRANSACTION_CANNOT_SEND_ZERO: "¡No puede enviar nada!",
     LEADERBOARD_CANNOT_HAVE_MULTIPLE: "No dejes abierto más de una clasificación.",
     TRANSACTION_LIST_CANNOT_HAVE_MULTIPLE: "No deja abierto más de una lista de transacciones.",
