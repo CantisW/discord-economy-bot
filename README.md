@@ -18,7 +18,7 @@ Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher).
 * Fairly simple to set up system
 * Slash commands
 * Simple economy commands
-* Leaderboards and "blockchain"-like transaction logging
+* Leaderboards and blockchain-like transaction logging
 * Localization
 * API support
 
