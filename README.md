@@ -1,44 +1,38 @@
 # Discord Economy Bot
 
-A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any similar game).
+A cryptocurrency-styled bot that you can change to your liking for Minecraft servers (or any game/usage).
 
 # To Use
 
 * Clone this repository (`git clone https://github.com/CantisW/discord-economy-bot`)
 * Open Visual Studio Code or similar and open a terminal
+* Download PostgreSQL and set it up. Optionally, download a DB management service such as [DBeaver](https://dbeaver.io/download/).
+* Put your username and password into `ormconfig.json.default` then rename it to `ormconfig.json`. Everything else is already set up.
 * Type in `npm i` and wait for dependencies to install
 * Type in `npm start`
 
 Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher).
 
+# Features
+
+* Fairly simple to set up system
+* Slash commands
+* Simple economy commands
+* Leaderboards and blockchain-like transaction logging
+* Localization
+* API support
+
 # Settings
 
-All the settings are located in ./data/*.
+All bot settings are located in `src/data`.
 
-user-data.json contains all user data. Don't touch this unless you like to manually adjust balances.
-
-config.json is where you set up the coin data for your currency.
-
-blockchain.json is just the blockchain data. If you want to "disable" this, then erase everything in addToBlockchain() in data/economy-blockchain.js and force it to return true.
-
-bot-settings.json are bot settings. Put your prefix, bot token, and custom status here.
-
-app.js is the API app. (Scroll down for more info)
+`bot.json` handles all bot-specific settings. Here is where you'll input your [token](https://discord.com/developers/applications) and [guild id]().
+'settings.json' handles the settings for your currency. Put in a [name](), [max supply](), etc.
 
 # API Setup
 
-To use the API (if you need to access blockchain or user data via HTTP), you need to install Express and Concurrently. **Please make sure you have a package! If you don't, make a package.json first using `npm init`!**
-Open terminal and type in:
+To use the API, run the bot using `npm run api`.
+The default port is `3000`, but that can be changed in `app.ts`.
+Access the API using `localhost:port`. `localhost` can also be your own URL.
 
-`npm install express --save`
-then
-`npm install concurrently --save`
-
-In your newly created package.json, replace "dev" under "scripts" with the following:
-
-`"dev": "concurrently \"node --experimental-modules --experimental-json-modules .\" \"node server.js" `
-
-Now you can start both your API and bot using `npm start dev`.
-Don't forget to forward to port 3000 (or whatever you set it to in the server.js).
-
-Enjoy!
+Don't forget to [port forward](https://portforward.com/)!

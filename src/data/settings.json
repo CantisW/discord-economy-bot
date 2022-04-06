@@ -1,0 +1,11 @@
+{
+    "coinName": "SandCoin",
+    "ticker": "SAND",
+    "maxSupply": 100000,
+    "blockReward": 5,
+    "exchangeRate": 0.05,
+    "currency": "iron",
+    "decimals": 2,
+    "txFee": 0.1,
+    "storedFees": 0
+}
