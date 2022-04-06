@@ -55,7 +55,7 @@ export class Account {
 
     @Slash("locale", { description: "Define your localization. This will only change command replies." })
     async locale(
-        @SlashOption("locale", { type: "STRING", description: "Pick a locale from the list. [ string ]", required: false})
+        @SlashOption("locale", { type: "STRING", description: "Pick a locale from the list. [ string or \"list\" ]", required: false})
         locale: string,
         interaction: CommandInteraction
     ) {
