@@ -24,7 +24,15 @@ Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher).
 
 # Settings
 
-ALl bot settings are located in `src/data`.
+All bot settings are located in `src/data`.
 
 `bot.json` handles all bot-specific settings. Here is where you'll input your [token](https://discord.com/developers/applications) and [guild id]().
 'settings.json' handles the settings for your currency. Put in a [name](), [max supply](), etc.
+
+# API Setup
+
+To use the API, run the bot using `npm run api`.
+The default port is `3000`, but that can be changed in `app.ts`.
+Access the API using `localhost:port`. `localhost` can also be your own URL.
+
+Don't forget to [port forward](https://portforward.com/)!
