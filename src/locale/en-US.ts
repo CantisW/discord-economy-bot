@@ -61,7 +61,7 @@ export const STRINGS = {
     TRANSACTION_VIEW_PREV_HASH_LABEL: "Previous Hash",
     TRANSACTION_SUCCESS: "Transaction successful.",
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
-        `You have successfully mined for the block reward of ${blockReward} ${ticker} and ${parsedFees} in TX fees.`,
+        `You have successfully mined for the block reward of ${blockReward} ${ticker} and have received ${parsedFees} in TX fees.`,
     LOCALE_CHANGED: "Your locale has successfully been changed!",
     CURRENT_LOCALE: (localeName: string, locale: string) => `Your current locale is set to ${localeName} [${locale}].`,
 }
