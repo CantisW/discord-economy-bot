@@ -33,7 +33,7 @@ export const STRINGS = {
     INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) => 
         `1 ${ticker} por ${exchangeRate} ${currency}.\n1 ${currency} por ${calculatedExchange}`,
     INFO_CURRENT_SUPPLY_LABEL: "Suminstro actual",
-    INFO_BLOCK_REWARD_LABEL: "Recompensa del bloque",
+    INFO_BLOCK_REWARD_LABEL: "Recompensa por bloque",
     INFO_AMOUNT_MINED_LABEL: "Cantidad minado",
     INFO_AMOUNT_MINED_VALUE: (amountMined: number) => `${amountMined}% del suministro total.`,
     INFO_MARKET_CAP_LABEL: "Tapa del mercado",
@@ -62,7 +62,7 @@ export const STRINGS = {
     TRANSACTION_VIEW_PREV_HASH_LABEL: "Hash anterior",
     TRANSACTION_SUCCESS: "¡Transacción éxitosa!",
     SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
-        `Has minado con éxito la recompensa del bloque de ${blockReward} ${ticker} y has recibido ${parsedFees} en tarifas de transacción.`,
+        `Has minado con éxito la recompensa por bloque de ${blockReward} ${ticker} y has recibido ${parsedFees} en tarifas de transacción.`,
     LOCALE_CHANGED: "¡Has cambiado tu idioma con éxito!",
     CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} [${locale}].\nCreado por ${credits}.`,
 }
