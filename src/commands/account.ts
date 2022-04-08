@@ -23,15 +23,17 @@ export class Account {
         interaction: CommandInteraction
     ) {
         let { ticker, exchangeRate, currency } = getConfig();
+        console.log(action);
         switch (action) {
             case "create":
                 if (await checkIfAccountExists(interaction.user.id)) {
                     return interaction.reply(await lang(`ACCOUNT_ALREADY_EXISTS`, interaction.user.id));
-                } else {
-                    createAccount(interaction.user.id).then(async () => {
-                        return interaction.reply(await lang(`ACCOUNT_CREATED`, interaction.user.id));
-                    });
                 }
+                createAccount(interaction.user.id).then(async () => {
+                    interaction.reply(await lang(`ACCOUNT_CREATED`, interaction.user.id)).catch(err =>
+                        interaction.reply(err));
+                });
+                break;
             case "bal":
                 let bal = await getAccountBalance(interaction.user.id);
                 if (!bal) return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
