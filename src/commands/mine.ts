@@ -9,15 +9,20 @@ const cooldown = 20 * 60 * 1000;
 
 @Discord()
 export class Mine {
-    @Slash("mine", { description: "Mine some coins!"} )
-    async mine(
-        interaction: CommandInteraction
-    ) {
+    @Slash("mine", { description: "Mine some coins!" })
+    async mine(interaction: CommandInteraction) {
         let { storedFees } = getConfig();
         let parsedFees = parseDecimals(storedFees);
-        if (doCooldown(interaction.commandName, cooldown, interaction.user.id)) return interaction.reply(await lang(`COOLDOWN`, interaction.user.id, [ cooldown, await getUnit(cooldown, interaction.user.id)]))
-        mine(interaction.user.id).then(async () => {
-            interaction.reply(await lang(`SUCCESSFULLY_MINED`, interaction.user.id, [ blockReward, ticker, parsedFees ]))
-        }).catch(err => interaction.reply(err))
+        if (doCooldown(interaction.commandName, cooldown, interaction.user.id))
+            return interaction.reply(
+                await lang(`COOLDOWN`, interaction.user.id, [cooldown, await getUnit(cooldown, interaction.user.id)]),
+            );
+        mine(interaction.user.id)
+            .then(async () => {
+                interaction.reply(
+                    await lang(`SUCCESSFULLY_MINED`, interaction.user.id, [blockReward, ticker, parsedFees]),
+                );
+            })
+            .catch((err) => interaction.reply(err));
     }
 }

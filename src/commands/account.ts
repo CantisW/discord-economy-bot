@@ -20,7 +20,7 @@ export class Account {
         @SlashChoice("balance", "bal")
         @SlashOption("action", { type: "STRING" })
         action: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         let { ticker, exchangeRate, currency } = getConfig();
         console.log(action);
@@ -30,63 +30,72 @@ export class Account {
                     return interaction.reply(await lang(`ACCOUNT_ALREADY_EXISTS`, interaction.user.id));
                 }
                 createAccount(interaction.user.id).then(async () => {
-                    interaction.reply(await lang(`ACCOUNT_CREATED`, interaction.user.id)).catch(err =>
-                        interaction.reply(err));
+                    interaction
+                        .reply(await lang(`ACCOUNT_CREATED`, interaction.user.id))
+                        .catch((err) => interaction.reply(err));
                 });
                 break;
             case "bal":
                 let bal = await getAccountBalance(interaction.user.id);
                 if (!bal) return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
                 let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`;
-                return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [ calculated ]));
+                return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [calculated]));
         }
-    };
+    }
 
-    @Permission(false)
-    @Permission({ id: "301770103224270851", type: "USER", permission: true })
+    @Permission(true)
+    // @Permission({ id: "301770103224270851", type: "USER", permission: true })
     @Slash("fa")
     async fa(
         @SlashOption("id", { type: "STRING" })
         id: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         createAccount(id).then(async () => {
             interaction.reply(await lang(`ACCOUNT_CREATED`, interaction.user.id));
         });
     }
 
-    @Slash("locale", { description: "Define your localization. This will only change command replies." })
+    @Slash("locale", {
+        description: "Define your localization. This will only change command replies.",
+    })
     async locale(
-        @SlashOption("locale", { type: "STRING", description: "Pick a locale from the list. [ string or \"list\" ]", required: false})
+        @SlashOption("locale", {
+            type: "STRING",
+            description: 'Pick a locale from the list. [ string or "list" ]',
+            required: false,
+        })
         locale: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         const embed = new MessageEmbed()
-                .setColor('0xf1c40f' as ColorResolvable)
-                .setTitle(await lang(`LOCALES_LIST_TITLE`, interaction.user.id))
-                //.setURL('')s
-                //.setAuthor('Santeeisweird9')
-                .setDescription(await lang(`LOCALES_LIST_DESC`, interaction.user.id))
+            .setColor("0xf1c40f" as ColorResolvable)
+            .setTitle(await lang(`LOCALES_LIST_TITLE`, interaction.user.id))
+            //.setURL('')s
+            //.setAuthor('Santeeisweird9')
+            .setDescription(await lang(`LOCALES_LIST_DESC`, interaction.user.id));
 
         if (!locale) {
             let { localeKey, localeName } = await getLocale(interaction.user.id);
-            return interaction.reply(await lang(`CURRENT_LOCALE`, interaction.user.id, [ localeName, localeKey ]))
+            return interaction.reply(await lang(`CURRENT_LOCALE`, interaction.user.id, [localeName, localeKey]));
         }
         if (locale === "list") {
             const locales = await getAllLocales();
             const length = locales.length;
 
-            for (let i = 0; i<length; i++) {
+            for (let i = 0; i < length; i++) {
                 embed.addFields({
                     name: locales[i].localeKey,
-                    value: locales[i].localeName
-                })
+                    value: locales[i].localeName,
+                });
             }
-            return interaction.reply({ embeds: [embed] })
+            return interaction.reply({ embeds: [embed] });
         } else {
-            changeLocale(interaction.user.id, locale).then(async () => {
-                interaction.reply(await lang(`LOCALE_CHANGED`, interaction.user.id))
-            }).catch((err) => interaction.reply(err))
+            changeLocale(interaction.user.id, locale)
+                .then(async () => {
+                    interaction.reply(await lang(`LOCALE_CHANGED`, interaction.user.id));
+                })
+                .catch((err) => interaction.reply(err));
         }
     }
 }

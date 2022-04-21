@@ -20,13 +20,9 @@ export const WriteToConfig = (property: string, write: string | number) => {
 
     config[property] = write;
 
-    fs.writeFile(
-        "./src/data/settings.json",
-        JSON.stringify(config, null, 2),
-        (err) => {
-            if (err) console.log(err);
-        }
-    );
+    fs.writeFile("./src/data/settings.json", JSON.stringify(config, null, 2), (err) => {
+        if (err) console.log(err);
+    });
 };
 
 export const returnSetting = (setting: string) => {

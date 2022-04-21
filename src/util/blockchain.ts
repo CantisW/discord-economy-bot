@@ -19,9 +19,7 @@ export const parseDecimals = (num: number, places = decimals) => {
 };
 
 export const getSupply = async (): Promise<number> => {
-    let { sum } = await Account.createQueryBuilder("account")
-        .select("SUM(account.balance)", "sum")
-        .getRawOne();
+    let { sum } = await Account.createQueryBuilder("account").select("SUM(account.balance)", "sum").getRawOne();
     let { storedFees } = getConfig();
     sum = parseFloat(sum);
     return parseDecimals(sum + storedFees);
@@ -33,12 +31,9 @@ export const mine = (id: string): Promise<boolean> => {
         let supply = await getSupply();
         let { storedFees } = getConfig();
         if (!user) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, id));
-        if (parseDecimals(supply + blockReward) > maxSupply)
-            return reject(await lang(`SUPPLY_WILL_BE_EXCEEDED`, id));
+        if (parseDecimals(supply + blockReward) > maxSupply) return reject(await lang(`SUPPLY_WILL_BE_EXCEEDED`, id));
         try {
-            user.balance = parseDecimals(
-                user.balance + blockReward + storedFees
-            );
+            user.balance = parseDecimals(user.balance + blockReward + storedFees);
             user.save();
         } catch (err) {
             console.log(err);
@@ -49,11 +44,7 @@ export const mine = (id: string): Promise<boolean> => {
     });
 };
 
-export const MakeTransaction = async (
-    sender: string,
-    recepient: string,
-    amount: number
-): Promise<boolean> => {
+export const MakeTransaction = async (sender: string, recepient: string, amount: number): Promise<boolean> => {
     let { txFee, storedFees } = getConfig();
     return new Promise(async (resolve, reject) => {
         let senderAccount = await Account.findOne({
@@ -68,31 +59,20 @@ export const MakeTransaction = async (
         let timestamp = Date.now();
 
         amount = parseDecimals(amount);
-        
+
         if (amount === 0) return reject(await lang(`TRANSACTION_CANNOT_SEND_ZERO`, sender));
-        if (amount > senderAccount.balance + txFee)
-            return reject(await lang(`TRANSACTION_AMOUNT_INVALID`, sender));
+        if (amount > senderAccount.balance + txFee) return reject(await lang(`TRANSACTION_AMOUNT_INVALID`, sender));
         if (sanitizeId(sender) === sanitizeId(recepient))
             return reject(await lang(`TRANSACTION_CANNOT_TRANSFER_TO_SELF`, sender));
 
-        senderAccount.balance = parseDecimals(
-            senderAccount.balance - amount - txFee
-        );
-        recepientAccount.balance = parseDecimals(
-            recepientAccount.balance + amount
-        );
+        senderAccount.balance = parseDecimals(senderAccount.balance - amount - txFee);
+        recepientAccount.balance = parseDecimals(recepientAccount.balance + amount);
 
         senderAccount.save();
         recepientAccount.save();
 
         WriteToConfig("storedFees", storedFees + txFee);
-        await AddToBlockchain(
-            sanitizeId(sender),
-            sanitizeId(recepient),
-            amount,
-            timestamp,
-            txFee
-        );
+        await AddToBlockchain(sanitizeId(sender), sanitizeId(recepient), amount, timestamp, txFee);
         resolve(true);
     });
 };
@@ -102,7 +82,7 @@ export const AddToBlockchain = async (
     recepient: string,
     amount: number,
     timestamp: number,
-    txfee: number
+    txfee: number,
 ) => {
     let txid = hash(timestamp);
     let prev = "0";

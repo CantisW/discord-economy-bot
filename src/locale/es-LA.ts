@@ -10,7 +10,7 @@ export const STRINGS = {
     ACCOUNT_CANNOT_CREATE: "No se puede crear tu cuenta. Por favor intenta de nuevo en un ratito.",
     ACCOUNT_CANNOT_RETRIEVE: "¡Esta cuente no existe!",
     BALANCE_CANNOT_RETRIEVE: "No hay nada que mostrar.",
-    COOLDOWN: (cooldown: number, unit: string) => `Por favor intenta de nuevo en ${cooldown/60000} ${unit}!`,
+    COOLDOWN: (cooldown: number, unit: string) => `Por favor intenta de nuevo en ${cooldown / 60000} ${unit}!`,
     COOLDOWN_MINUTES: "minutos",
     COOLDOWN_SECONDS: "segundos",
     INPUT_INVALID_AMOUNT: "¡Por favor, entra una cantidad válido!",
@@ -30,7 +30,7 @@ export const STRINGS = {
     INFO_DESC: (coinName: string) => `Cambiar y transferir ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "Suministro máximo",
     INFO_EXCHANGE_RATE_LABEL: "Tipo de cambio",
-    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) => 
+    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) =>
         `1 ${ticker} por ${exchangeRate} ${currency}.\n1 ${currency} por ${calculatedExchange}`,
     INFO_CURRENT_SUPPLY_LABEL: "Suminstro actual",
     INFO_BLOCK_REWARD_LABEL: "Recompensa por bloque",
@@ -42,14 +42,16 @@ export const STRINGS = {
     INFO_DATA_LABEL: "Datos",
     LEADERBOARD_TITLE: "Clasificación",
     LEADERBOARD_DESC: "La lista mundial de los ricos (monstrando 1-10)",
-    LEADERBOARD_DESC_FORWARD: (index: number, to: number) => `La lista mundial de los ricos (monstrando ${index + 2}-${to + 1})`,
+    LEADERBOARD_DESC_FORWARD: (index: number, to: number) =>
+        `La lista mundial de los ricos (monstrando ${index + 2}-${to + 1})`,
     LEADERBOARD_DESC_BACK: (to: number) => `La lista mundial de los ricos (monstrando ${to + 1}-${to + 10})`,
     LEADERBOARD_VALUE: (value: string) => `${value} del suministro total.`,
     LOCALES_LIST_TITLE: "Idiomas regionales",
     LOCALES_LIST_DESC: "Lista de idiomas",
     TRANSACTION_LIST_TITLE: "Lista de transacciones",
     TRANSACTION_LIST_DESC: "Lista de transacciones recientes (mostrando 1-10)",
-    TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) => `Lista de transacciones recientes (mostrando ${index + 2}-${to + 1})`,
+    TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) =>
+        `Lista de transacciones recientes (mostrando ${index + 2}-${to + 1})`,
     TRANSACTION_LIST_DESC_BACK: (to: number) => `Lista de transacciones recientes (mostrando ${to + 1}-${to + 10})`,
     TRANSACTION_VIEW_TITLE: (txid: string) => `Mostrando ${txid}`,
     TRANSACTION_VIEW_DESC: "Ver una transacción.",
@@ -61,8 +63,9 @@ export const STRINGS = {
     TRANSACTION_VIEW_TX_FEE_LABEL: "Tarifa de transacción",
     TRANSACTION_VIEW_PREV_HASH_LABEL: "Hash anterior",
     TRANSACTION_SUCCESS: "¡Transacción éxitosa!",
-    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
+    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) =>
         `Has minado con éxito la recompensa por bloque de ${blockReward} ${ticker} y has recibido ${parsedFees} en tarifas de transacción.`,
     LOCALE_CHANGED: "¡Has cambiado tu idioma con éxito!",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `Tu idioma actual es ${localeName} [${locale}].\nCreado por ${credits}.`,
-}
+    CURRENT_LOCALE: (localeName: string, locale: string) =>
+        `Tu idioma actual es ${localeName} [${locale}].\nCreado por ${credits}.`,
+};

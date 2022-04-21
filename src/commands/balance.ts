@@ -10,14 +10,14 @@ export class Balance {
     async balance(
         @SlashOption("user", { type: "STRING", description: "Who? [ UserId or @User ]", required: false })
         user: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         let { ticker, exchangeRate, currency } = getConfig();
         if (!user) {
             let bal = await getAccountBalance(interaction.user.id);
             if (bal === undefined) return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
-            let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`
-            return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [ calculated ]));
+            let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`;
+            return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [calculated]));
         }
 
         let parsed = sanitizeId(user);
@@ -25,7 +25,7 @@ export class Balance {
         if (!bal) {
             return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
         }
-        let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`
-        interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE_OTHER_USER`, interaction.user.id, [ parsed, calculated ]));
+        let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency}).`;
+        interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE_OTHER_USER`, interaction.user.id, [parsed, calculated]));
     }
 }

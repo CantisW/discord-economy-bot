@@ -10,7 +10,7 @@ export const STRINGS = {
     ACCOUNT_CANNOT_CREATE: "アカウントを作成できませんでした。 後でもう一度やり直してください。",
     ACCOUNT_CANNOT_RETRIEVE: "このアカウントは存在しません！",
     BALANCE_CANNOT_RETRIEVE: "表示するバランスはありません。",
-    COOLDOWN: (cooldown: number, unit: string) => `でもう一度やり直してください ${cooldown/60000} ${unit}!`,
+    COOLDOWN: (cooldown: number, unit: string) => `でもう一度やり直してください ${cooldown / 60000} ${unit}!`,
     COOLDOWN_MINUTES: "分",
     COOLDOWN_SECONDS: "秒",
     INPUT_INVALID_AMOUNT: "有効な金額を入力してください！",
@@ -30,7 +30,7 @@ export const STRINGS = {
     INFO_DESC: (coinName: string) => `交換と転送 ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "最大供給",
     INFO_EXCHANGE_RATE_LABEL: "為替レート",
-    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) => 
+    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) =>
         `1 ${ticker} ために ${exchangeRate} ${currency}.\n1 ${currency} ために ${calculatedExchange}`,
     INFO_CURRENT_SUPPLY_LABEL: "電流供給",
     INFO_BLOCK_REWARD_LABEL: "ブロック報酬",
@@ -61,8 +61,9 @@ export const STRINGS = {
     TRANSACTION_VIEW_TX_FEE_LABEL: "取引料金",
     TRANSACTION_VIEW_PREV_HASH_LABEL: "以前のハッシュ",
     TRANSACTION_SUCCESS: "トランザクションは成功しました。",
-    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
+    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) =>
         `あなたは ${blockReward} ${ticker} 砂と ${parsedFees} の TX 料金の報酬のためにブロックを破壊することに成功しました。`,
     LOCALE_CHANGED: "ロケールが正常に変更されました。",
-    CURRENT_LOCALE: (localeName: string, locale: string) => `現在のロケールはに設定されています ${localeName} [${locale}].`,
-}
+    CURRENT_LOCALE: (localeName: string, locale: string) =>
+        `現在のロケールはに設定されています ${localeName} [${locale}].`,
+};
