@@ -9,7 +9,7 @@ export const STRINGS = {
     ACCOUNT_CANNOT_CREATE: "Your account couldn't be created. Please try again later.",
     ACCOUNT_CANNOT_RETRIEVE: "This account does not exist!",
     BALANCE_CANNOT_RETRIEVE: "There is no balance to show.",
-    COOLDOWN: (cooldown: number, unit: string) => `Please try again in ${cooldown/60000} ${unit}!`,
+    COOLDOWN: (cooldown: number, unit: string) => `Please try again in ${cooldown / 60000} ${unit}!`,
     COOLDOWN_MINUTES: "minutes",
     COOLDOWN_SECONDS: "seconds",
     INPUT_INVALID_AMOUNT: "Please input a valid amount!",
@@ -29,7 +29,7 @@ export const STRINGS = {
     INFO_DESC: (coinName: string) => `Exchange and transfer ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "Max Supply",
     INFO_EXCHANGE_RATE_LABEL: "Exchange Rate",
-    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) => 
+    INFO_EXCHANGE_RATE_VALUE: (ticker: string, exchangeRate: string, currency: string, calculatedExchange: string) =>
         `1 ${ticker} for ${exchangeRate} ${currency}.\n1 ${currency} for ${calculatedExchange}`,
     INFO_CURRENT_SUPPLY_LABEL: "Current Supply",
     INFO_BLOCK_REWARD_LABEL: "Block Reward",
@@ -48,7 +48,8 @@ export const STRINGS = {
     LOCALES_LIST_DESC: "List of locales",
     TRANSACTION_LIST_TITLE: "Transaction List",
     TRANSACTION_LIST_DESC: "List of recent transactions (showing 1-10)",
-    TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) => `List of recent transactions (showing ${index + 2}-${to + 1})`,
+    TRANSACTION_LIST_DESC_FORWARD: (index: number, to: number) =>
+        `List of recent transactions (showing ${index + 2}-${to + 1})`,
     TRANSACTION_LIST_DESC_BACK: (to: number) => `List of recent transactions (showing ${to + 1}-${to + 10})`,
     TRANSACTION_VIEW_TITLE: (txid: string) => `Viewing ${txid}`,
     TRANSACTION_VIEW_DESC: "View a transaction.",
@@ -60,8 +61,8 @@ export const STRINGS = {
     TRANSACTION_VIEW_TX_FEE_LABEL: "TX Fee",
     TRANSACTION_VIEW_PREV_HASH_LABEL: "Previous Hash",
     TRANSACTION_SUCCESS: "Transaction successful.",
-    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) => 
+    SUCCESSFULLY_MINED: (blockReward: number, ticker: string, parsedFees: number) =>
         `You have successfully mined for the block reward of ${blockReward} ${ticker} and have received ${parsedFees} in TX fees.`,
     LOCALE_CHANGED: "Your locale has successfully been changed!",
     CURRENT_LOCALE: (localeName: string, locale: string) => `Your current locale is set to ${localeName} [${locale}].`,
-}
+};

@@ -63,10 +63,12 @@ export class Leaderboard {
         }
 
         for (let i = 0; i <= index; i++) {
-            let val = `${this.users[i].balance} ${ticker} (${parseDecimals((this.users[i].balance / this.supply) * 100)}%)`;
+            let val = `${this.users[i].balance} ${ticker} (${parseDecimals(
+                (this.users[i].balance / this.supply) * 100,
+            )}%)`;
             embed.addFields({
                 name: `${this.users[i].address}`,
-                value: await lang("LEADERBOARD_VALUE", interaction.user.id, [ val ]),
+                value: await lang("LEADERBOARD_VALUE", interaction.user.id, [val]),
             });
         }
         if (components) {
@@ -93,9 +95,7 @@ export class Leaderboard {
             .setTitle(await lang("LEADERBOARD_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(
-                await lang("LEADERBOARD_DESC_FORWARD", interaction.user.id, [ index, to ])
-            )
+            .setDescription(await lang("LEADERBOARD_DESC_FORWARD", interaction.user.id, [index, to]))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
@@ -113,7 +113,7 @@ export class Leaderboard {
             embed.addFields({
                 name: `${this.users[i].address}`,
                 value: `${this.users[i].balance} ${ticker} (${parseDecimals(
-                    (this.users[i].balance / this.supply) * 100
+                    (this.users[i].balance / this.supply) * 100,
                 )}% of total supply)`,
             });
         }
@@ -153,9 +153,7 @@ export class Leaderboard {
             .setTitle(await lang("LEADERBOARD_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(
-                await lang("LEADERBOARD_DESC_BACK", interaction.user.id, [ to ])
-            )
+            .setDescription(await lang("LEADERBOARD_DESC_BACK", interaction.user.id, [to]))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
@@ -176,7 +174,7 @@ export class Leaderboard {
             embed.addFields({
                 name: `${this.users[i].address}`,
                 value: `${this.users[i].balance} ${ticker} (${parseDecimals(
-                    (this.users[i].balance / this.supply) * 100
+                    (this.users[i].balance / this.supply) * 100,
                 )}% of total supply)`,
             });
         }

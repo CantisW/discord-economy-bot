@@ -14,13 +14,13 @@ export class Transaction extends BaseEntity {
     @Column()
     recepient: string;
 
-    @Column({ type: 'float' })
+    @Column({ type: "float" })
     amount: number;
 
-    @CreateDateColumn({ type: 'timestamp' })
+    @CreateDateColumn({ type: "timestamp" })
     timestamp: Date;
 
-    @Column({ type: 'float' })
+    @Column({ type: "float" })
     txfee: number;
 
     @Column()

@@ -4,7 +4,7 @@ import { IAccount } from "./types.js";
 import fs from "fs";
 import path from "path";
 
-const localesPath = "./src/locale"
+const localesPath = "./src/locale";
 
 export const createAccount = (id: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
@@ -39,26 +39,29 @@ export const returnOrderedUsers = async () => {
 };
 
 export const getLocale = async (id: string) => {
-    let locale = "en-US"
+    let locale = "en-US";
 
     const user = await Account.findOne({ address: id });
     if (user) locale = user.locale;
 
-    const localeFile = fs.readdirSync(localesPath).filter(file => path.parse(file).base === `${locale}.ts`).join();
+    const localeFile = fs
+        .readdirSync(localesPath)
+        .filter((file) => path.parse(file).base === `${locale}.ts`)
+        .join();
     const file = await import(`../locale/${localeFile}`);
-    return { "localeKey": file.locale, "localeName": file.localeName };
-}
+    return { localeKey: file.locale, localeName: file.localeName };
+};
 
 export const getAllLocales = async () => {
     let object = [];
-    const files = fs.readdirSync(localesPath).filter(file => file.endsWith(".ts"));
+    const files = fs.readdirSync(localesPath).filter((file) => file.endsWith(".ts"));
 
     for (const file in files) {
         const localeFile = await import(`../locale/${files[file]}`);
-        object.push({ "localeKey": localeFile.locale, "localeName": localeFile.localeName })
+        object.push({ localeKey: localeFile.locale, localeName: localeFile.localeName });
     }
     return object;
-}
+};
 
 export const changeLocale = async (id: string, locale: string) => {
     return new Promise(async (resolve, reject) => {
@@ -72,7 +75,7 @@ export const changeLocale = async (id: string, locale: string) => {
         if (user) {
             locales.forEach((v) => {
                 if (v === localeFile) found = true;
-            })
+            });
             if (found) {
                 user.locale = locale;
                 user.save();
@@ -81,16 +84,19 @@ export const changeLocale = async (id: string, locale: string) => {
                 reject(await lang(`LOCALE_DOES_NOT_EXIST`, id));
             }
         }
-    })
-}
+    });
+};
 
 export const lang = async (string: string, id: string, params?: any[]) => {
-    let locale = "en-US"
+    let locale = "en-US";
 
     const user = await Account.findOne({ address: id });
     if (user) locale = user.locale;
 
-    const localeFile = fs.readdirSync(localesPath).filter(file => path.parse(file).base === `${locale}.ts`).join();
+    const localeFile = fs
+        .readdirSync(localesPath)
+        .filter((file) => path.parse(file).base === `${locale}.ts`)
+        .join();
     const file = await import(`../locale/${localeFile}`);
 
     if (typeof file.STRINGS[string] === "undefined") return file.STRINGS._NO_LOCALE(string);
@@ -110,4 +116,4 @@ export const lang = async (string: string, id: string, params?: any[]) => {
         }
     }
     return file.STRINGS[string];
-}
+};

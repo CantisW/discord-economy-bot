@@ -1,4 +1,11 @@
-import { ButtonInteraction, ColorResolvable, CommandInteraction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import {
+    ButtonInteraction,
+    ColorResolvable,
+    CommandInteraction,
+    MessageActionRow,
+    MessageButton,
+    MessageEmbed,
+} from "discord.js";
 import { ButtonComponent, Discord, Slash, SlashOption } from "discordx";
 import { getTransactionInfo, MakeTransaction, returnOrderedBlockchain } from "../util/blockchain.js";
 import { getConfig, getUserIndex, setUserIndex } from "../util/bot.js";
@@ -21,36 +28,41 @@ const forwardButton = new MessageButton({
 
 @Discord()
 export class Blockchain {
-    tx: any[]
+    tx: any[];
     length: number;
 
     @Slash("transfer", { description: "Make a transaction." })
     async transfer(
-        @SlashOption("recepient", { type: "STRING", description: "Who will be receiving your transaction? [ UserId or @User ]" })
+        @SlashOption("recepient", {
+            type: "STRING",
+            description: "Who will be receiving your transaction? [ UserId or @User ]",
+        })
         recepient: string,
         @SlashOption("amount", { type: "STRING", description: "How much to send. [ number ]" })
         amount: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         let amt = parseFloat(amount);
         if (!amt) return interaction.reply(await lang(`INPUT_INVALID_AMOUNT`, interaction.user.id));
-        await MakeTransaction(interaction.user.id, recepient, amt).then(async () => {
-            interaction.reply(await lang(`TRANSACTION_SUCCESS`, interaction.user.id))
-        }).catch(err => interaction.reply(err))
+        await MakeTransaction(interaction.user.id, recepient, amt)
+            .then(async () => {
+                interaction.reply(await lang(`TRANSACTION_SUCCESS`, interaction.user.id));
+            })
+            .catch((err) => interaction.reply(err));
     }
 
     @Slash("view", { description: "View a transaction." })
     async view(
-        @SlashOption("txid", { type: "STRING", description: "[ string TXID ]"})
+        @SlashOption("txid", { type: "STRING", description: "[ string TXID ]" })
         txid: string,
-        interaction: CommandInteraction
+        interaction: CommandInteraction,
     ) {
         let tx = await getTransactionInfo(txid);
         if (!tx) return interaction.reply(await lang(`TRANSACTION_VIEW_CANNOT_RECEIVE`, interaction.user.id));
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
-            .setTitle(await lang("TRANSACTION_VIEW_TITLE", interaction.user.id, [ txid ]))
+            .setTitle(await lang("TRANSACTION_VIEW_TITLE", interaction.user.id, [txid]))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
             .setDescription(await lang("TRANSACTION_VIEW_DESC", interaction.user.id))
@@ -62,7 +74,10 @@ export class Blockchain {
                 { name: await lang("TRANSACTION_VIEW_AMOUNT_SENT_LABEL", interaction.user.id), value: `${tx.amount}` },
                 { name: await lang("TRANSACTION_VIEW_TIMESTAMP_LABEL", interaction.user.id), value: `${tx.timestamp}` },
                 { name: await lang("TRANSACTION_VIEW_TX_FEE_LABEL", interaction.user.id), value: `${tx.txfee}` },
-                { name: await lang("TRANSACTION_VIEW_PREV_HASH_LABEL", interaction.user.id), value: `${tx.previousHash}` },
+                {
+                    name: await lang("TRANSACTION_VIEW_PREV_HASH_LABEL", interaction.user.id),
+                    value: `${tx.previousHash}`,
+                },
             )
             //.setThumbnail('')
             //.addField('', '', true)
@@ -70,7 +85,7 @@ export class Blockchain {
             .setTimestamp()
             .setFooter(`${coinName} (${ticker})`, ""); // TODO: set url as second arg
 
-        interaction.reply({ embeds: [embed] })
+        interaction.reply({ embeds: [embed] });
     }
 
     @Slash("list", { description: "List transactions." })
@@ -132,9 +147,7 @@ export class Blockchain {
             .setTitle(await lang("TRANSACTION_LIST_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(
-                await lang("TRANSACTION_LIST_DESC_FORWARD", interaction.user.id)
-            )
+            .setDescription(await lang("TRANSACTION_LIST_DESC_FORWARD", interaction.user.id))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
@@ -190,9 +203,7 @@ export class Blockchain {
             .setTitle(await lang("TRANSACTION_LIST_TITLE", interaction.user.id))
             //.setURL('')s
             //.setAuthor('Santeeisweird9')
-            .setDescription(
-                await lang("TRANSACTION_LIST_DESC_BACK", interaction.user.id)
-            )
+            .setDescription(await lang("TRANSACTION_LIST_DESC_BACK", interaction.user.id))
             //.setThumbnail('')
             //.addField('', '', true)
             //.setImage('')
