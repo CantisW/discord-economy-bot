@@ -1,0 +1,6 @@
+createcommand("work");
+define work: if this command is used you will get a random response followed by 10 - 30 sandcoin();
+workResponse1 = ("you ate 15 packs of hotdogs for (sandcoin amount here))();
+workResponse2 = ("you became a discord mod and earned (sandcoin amount here))();
+
+//is this javascript or python im just gonna use the 2 dashes because idk
