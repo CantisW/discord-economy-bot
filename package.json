@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node --experimental-json-modules --experimental-modules --trace-warnings --loader ts-node/esm src/index.ts",
+    "start": "node --experimental-json-modules --experimental-modules --loader ts-node/esm src/index.ts",
     "dev": "node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts",
     "api": "concurrently \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/index.ts\" \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts\" ",
     "prettier": "prettier \"src/**/*.ts\"",
