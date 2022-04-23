@@ -1,8 +1,8 @@
 {
-    "token":"OTQyODcwNTI2MzYyMjgwMDc4.Ygqymw.MdRA-DNO4zpCgmdMss53vRdvDCQ",
-    "prefix":"-",
+    "token":"YOUR_TOKEN_HERE",
+    "prefix":"!",
     "status": "The decentralized currency of Minecraft",
-    "guildId": "942874988837503057",
-    "data": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxUPmNczrjFQu-XTxVYGKh65KMoUc_JllrbJ1LUaBPY0NwlvBDEfHg01oZ2OQM-Eoq1aMYTmsmwFUa/pubhtml?gid=0&single=true",
+    "guildId": "YOUR_GUILD_ID_HERE",
+    "data": "",
     "environment": "production"
 }
