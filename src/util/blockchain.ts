@@ -126,3 +126,7 @@ export const getTransactionInfo = async (txid: string) => {
     const tx = await Transaction.findOne({ txid: txid });
     return tx;
 };
+
+export const escape = (input: String) => {
+    return input.replace(/[\\$'"]/g, "\\$&");
+}
