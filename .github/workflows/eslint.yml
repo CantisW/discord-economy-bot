@@ -16,3 +16,4 @@ jobs:
       run: npm ci
     - name: Run ESLint
       run: npm run lint --if-present
+      continue-on-error: true
