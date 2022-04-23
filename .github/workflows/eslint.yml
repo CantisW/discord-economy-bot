@@ -15,5 +15,8 @@ jobs:
     - name: Install modules
       run: npm ci
     - name: Run ESLint
-      run: npm run lint --if-present
+      run: npx eslint .
+          --config .eslintrc.json
+          --ext .js,.jsx,.ts,.tsx
+          --fix
       continue-on-error: true
