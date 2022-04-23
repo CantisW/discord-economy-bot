@@ -4,5 +4,5 @@
     "status": "The decentralized currency of Minecraft",
     "guildId": "YOUR_GUILD_ID_HERE",
     "data": "",
-    "environment": "production"
+    "environment": "test"
 }
