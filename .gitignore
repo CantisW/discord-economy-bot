@@ -4,3 +4,4 @@ build/
 ormconfig.json
 *-backup.json
 *.env
+*.bat
