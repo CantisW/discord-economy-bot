@@ -9,7 +9,7 @@
     "dev": "node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts",
     "api": "concurrently \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/index.ts\" \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts\" ",
     "prettier": "prettier \"src/**/*.ts\"",
-    "prettier:fix": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src/**/*.ts --fix"
   },
   "author": "",
