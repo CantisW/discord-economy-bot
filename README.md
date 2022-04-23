@@ -13,6 +13,14 @@ A cryptocurrency-styled bot that you can change to your liking for Minecraft ser
 
 Enjoy! Make sure it is set up and you have node.js (`v16.14.0` or higher).
 
+# Setup Bot
+
+Go to the [Discord Developer Portal](https://discord.com/developers/applications) and make a [bot](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/).
+
+### IMPORTANT
+
+Please make sure that when inviting the bot to your server, you tick `bot` **AND** `application.commands` else the bot will not work.
+
 # Features
 
 * Fairly simple to set up system
