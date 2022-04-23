@@ -2,6 +2,7 @@ import express from "express";
 import { createConnection } from "typeorm";
 import { Account } from "./entity/Account.js";
 import { Transaction } from "./entity/Transaction.js";
+import { escape } from "./util/blockchain.js";
 
 const app = express();
 const port = 3000 || process.env.PORT;
@@ -29,7 +30,7 @@ app.get("/blockchain/latest", async (req, res) => {
 });
 
 app.get("/blockchain/:txid", async (req, res) => {
-    const id = req.params.txid;
+    const id = escape(req.params.txid);
 
     if (req.params) {
         const selected = await Transaction.findOne({ txid: id });
@@ -46,7 +47,7 @@ app.get("/id", async (req, res) => {
 });
 
 app.get("/id/:id", async (req, res) => {
-    const id = req.params.id;
+    const id = escape(req.params.id);
 
     if (req.params) {
         const selected = await Account.findOne({ address: id });
