@@ -129,4 +129,4 @@ export const getTransactionInfo = async (txid: string) => {
 
 export const escape = (input: String) => {
     return input.replace(/[\\$'"]/g, "\\$&");
-}
+};
