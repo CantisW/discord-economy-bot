@@ -9,7 +9,8 @@
     "dev": "node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts",
     "api": "concurrently \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/index.ts\" \"node --experimental-json-modules --experimental-modules --loader ts-node/esm src/app.ts\" ",
     "prettier": "prettier \"src/**/*.ts\"",
-    "prettier:fix": "prettier --write \"src/**/*.ts\""
+    "prettier:fix": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src/**/*.ts --fix"
   },
   "author": "",
   "type": "module",
@@ -30,6 +31,11 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.17",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "prettier": "2.6.2",
     "typescript": "^4.5.5"
   }
