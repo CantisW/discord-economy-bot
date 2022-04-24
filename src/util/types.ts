@@ -13,9 +13,12 @@ export interface IConfig {
 
 export interface ISettings {
     [key: string]: string;
-    prefix: string;
     token: string;
+    prefix: string;
+    status: string;
     guildId: string;
+    data: string;
+    environment: string;
 }
 
 export interface IAccount {
@@ -23,8 +26,24 @@ export interface IAccount {
     balance: number;
 }
 
+export interface ITransaction {
+    index: number;
+    txid: string;
+    sender: string;
+    recepient: string;
+    amount: number;
+    timestamp: Date;
+    txfee: number;
+    previousHash: string;
+}
+
 export interface ISharedArray {
     command: string;
     time: number;
     author: string;
+}
+
+export interface ILocale {
+    localeKey: string;
+    localeName: string;
 }
