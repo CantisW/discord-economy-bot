@@ -2,6 +2,7 @@ import crypto from "crypto";
 import { Account } from "../entity/Account.js";
 import { Transaction } from "../entity/Transaction.js";
 import { getConfig, sanitizeId, WriteToConfig } from "./bot.js";
+import { ITransaction } from "./types.js";
 import { lang } from "./users.js";
 
 const { decimals, blockReward, maxSupply } = getConfig();
@@ -18,18 +19,19 @@ export const parseDecimals = (num: number, places = decimals) => {
     return Math.round(num * 10 ** places) / 10 ** places; // mult by places then round to cut off excess, then go back to decimal
 };
 
-export const getSupply = async (): Promise<number> => {
-    let { sum } = await Account.createQueryBuilder("account").select("SUM(account.balance)", "sum").getRawOne();
-    let { storedFees } = getConfig();
-    sum = parseFloat(sum);
+export const getSupply = async () => {
+    const obj = await Account.createQueryBuilder("account").select("SUM(account.balance)", "sum").getRawOne();
+    const sum: number = obj.sum;
+    const { storedFees } = getConfig();
+    // sum = parseFloat(sum);
     return parseDecimals(sum + storedFees);
 };
 
 export const mine = (id: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
-        let user = await Account.findOne({ address: id });
-        let supply = await getSupply();
-        let { storedFees } = getConfig();
+        const user = await Account.findOne({ address: id });
+        const supply = await getSupply();
+        const { storedFees } = getConfig();
         if (!user) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, id));
         if (parseDecimals(supply + blockReward) > maxSupply) return reject(await lang(`SUPPLY_WILL_BE_EXCEEDED`, id));
         try {
@@ -45,18 +47,18 @@ export const mine = (id: string): Promise<boolean> => {
 };
 
 export const MakeTransaction = async (sender: string, recepient: string, amount: number): Promise<boolean> => {
-    let { txFee, storedFees } = getConfig();
+    const { txFee, storedFees } = getConfig();
     return new Promise(async (resolve, reject) => {
-        let senderAccount = await Account.findOne({
+        const senderAccount = await Account.findOne({
             address: sanitizeId(sender),
         });
-        let recepientAccount = await Account.findOne({
+        const recepientAccount = await Account.findOne({
             address: sanitizeId(recepient),
         });
         if (!senderAccount) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, sender));
         if (!recepientAccount) return reject(await lang(`ACCOUNT_CANNOT_RETRIEVE`, sender));
 
-        let timestamp = Date.now();
+        const timestamp = Date.now();
 
         amount = parseDecimals(amount);
 
@@ -84,12 +86,12 @@ export const AddToBlockchain = async (
     timestamp: number,
     txfee: number,
 ) => {
-    let txid = hash(timestamp);
+    const txid = hash(timestamp);
     let prev = "0";
 
-    let i = await Transaction.count();
+    const i = await Transaction.count();
     if (i > 0) {
-        let previousTransaction = await Transaction.findOne({ index: i });
+        const previousTransaction = await Transaction.findOne({ index: i });
         prev = previousTransaction!.txid;
     }
     try {
@@ -107,15 +109,15 @@ export const AddToBlockchain = async (
 };
 
 export const hash = (timestamp: number) => {
-    let nonce = Math.random() * 99999999;
+    const nonce = Math.random() * 99999999;
     return crypto
         .createHash("md5")
         .update(`${timestamp * nonce}`)
         .digest("hex");
 };
 
-export const returnOrderedBlockchain = async () => {
-    let tx = await Transaction.createQueryBuilder("transaction")
+export const returnOrderedBlockchain = async (): Promise<ITransaction[]> => {
+    const tx = await Transaction.createQueryBuilder("transaction")
         .select("*")
         .orderBy("transaction.timestamp", "DESC")
         .getRawMany();
@@ -127,6 +129,6 @@ export const getTransactionInfo = async (txid: string) => {
     return tx;
 };
 
-export const escape = (input: String) => {
+export const escape = (input: string) => {
     return input.replace(/[\\$'"]/g, "\\$&");
 };
