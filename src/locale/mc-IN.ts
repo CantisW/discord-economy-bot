@@ -43,7 +43,7 @@ export const STRINGS = {
         "-.-- --- ..- .-. / .- -.-. -.-. --- ..- -. - / .... .- ... / -... . . -. / -.-. .-. . .- - . -.. -.-.--",
     ACCOUNT_RETURN_BALANCE: (calculated: string) =>
         `-.-- --- ..- .-. / .- -.-. -.-. --- ..- -. - / -... .- .-.. .- -. -.-. . / .. ... ${calculated}`,
-    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: any) => `${parsed} .... .- ... ${calculated}`,
+    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: string) => `${parsed} .... .- ... ${calculated}`,
     CONVERT_AMOUNT_IS: (amount: string, calculated: string) => `${amount} .. ... ${calculated}`,
     INFO_DESC: (coinName: string) =>
         `. -..- -.-. .... .- -. --. . / .- -. -.. / - .-. .- -. ... ..-. . .-. / ${coinName}!`,

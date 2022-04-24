@@ -24,7 +24,7 @@ export const STRINGS = {
 
     ACCOUNT_CREATED: "Your account has been created!",
     ACCOUNT_RETURN_BALANCE: (calculated: string) => `Your account balance is ${calculated}.`,
-    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: any) => `${parsed} has ${calculated}.`,
+    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: string) => `${parsed} has ${calculated}.`,
     CONVERT_AMOUNT_IS: (amount: string, calculated: string) => `${amount} is ${calculated}.`,
     INFO_DESC: (coinName: string) => `Exchange and transfer ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "Max Supply",

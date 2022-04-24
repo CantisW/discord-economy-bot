@@ -24,7 +24,7 @@ export const STRINGS = {
 
     ACCOUNT_CREATED: "UwU uwu uwu! Nya~",
     ACCOUNT_RETURN_BALANCE: (calculated: string) => `UwU uwu uwu ${calculated}.`,
-    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: any) => `${parsed} uwu ${calculated}.`,
+    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: string) => `${parsed} uwu ${calculated}.`,
     CONVERT_AMOUNT_IS: (amount: string, calculated: string) => `${amount} uwu ${calculated}.`,
     INFO_DESC: (coinName: string) => `UwU uwu ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "UwU",

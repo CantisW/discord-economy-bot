@@ -25,7 +25,7 @@ export const STRINGS = {
 
     ACCOUNT_CREATED: "あなたのアカウントが作成されました！",
     ACCOUNT_RETURN_BALANCE: (calculated: string) => `アカウントの残高は ${calculated}.`,
-    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: any) => `${parsed} もっている ${calculated}.`,
+    ACCOUNT_RETURN_BALANCE_OTHER_USER: (parsed: string, calculated: string) => `${parsed} もっている ${calculated}.`,
     CONVERT_AMOUNT_IS: (amount: string, calculated: string) => `${amount} は ${calculated}.`,
     INFO_DESC: (coinName: string) => `交換と転送 ${coinName}!`,
     INFO_MAX_SUPPLY_LABEL: "最大供給",
