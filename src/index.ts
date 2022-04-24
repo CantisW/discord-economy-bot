@@ -9,7 +9,7 @@ import { getConfig, returnSetting } from "./util/bot.js";
 import config from "./data/bot.json" assert { type: "json" };
 
 let { token, prefix, status, guildId } = config;
-let { coinName, ticker } = getConfig();
+const { coinName, ticker } = getConfig();
 
 createConnection()
     .then(() => console.log("Connected to DB!"))
@@ -40,7 +40,7 @@ client.once("ready", async () => {
         global: { log: true },
     });
     await client.initApplicationPermissions(true);
-    client!.user!.setPresence({ activities: [{ name: `${coinName} (${ticker}) | ${status}` }], status: "online" });
+    client.user!.setPresence({ activities: [{ name: `${coinName} (${ticker}) | ${status}` }], status: "online" });
     console.log("Ready!");
 });
 
