@@ -18,12 +18,12 @@ export class Convert {
         amount: string,
         interaction: CommandInteraction,
     ) {
-        let { exchangeRate } = getConfig();
+        const { exchangeRate } = getConfig();
         if (!parseFloat(amount)) return interaction.reply(await lang(`INPUT_INVALID_AMOUNT`, interaction.user.id));
         const amt = parseDecimals(parseFloat(amount));
 
-        let calculatedToCoin = `${parseDecimals(amt * exchangeRate)} ${currency}`;
-        let calculatedToCurrency = `${parseDecimals(amt / exchangeRate)} ${ticker}`;
+        const calculatedToCoin = `${parseDecimals(amt * exchangeRate)} ${currency}`;
+        const calculatedToCurrency = `${parseDecimals(amt / exchangeRate)} ${ticker}`;
 
         switch (to) {
             case "coin":

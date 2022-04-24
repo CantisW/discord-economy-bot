@@ -4,15 +4,15 @@ import { mine, parseDecimals } from "../util/blockchain.js";
 import { doCooldown, getConfig, getUnit } from "../util/bot.js";
 import { lang } from "../util/users.js";
 
-let { blockReward, ticker } = getConfig();
+const { blockReward, ticker } = getConfig();
 const cooldown = 20 * 60 * 1000;
 
 @Discord()
 export class Mine {
     @Slash("mine", { description: "Mine some coins!" })
     async mine(interaction: CommandInteraction) {
-        let { storedFees } = getConfig();
-        let parsedFees = parseDecimals(storedFees);
+        const { storedFees } = getConfig();
+        const parsedFees = parseDecimals(storedFees);
         if (doCooldown(interaction.commandName, cooldown, interaction.user.id))
             return interaction.reply(
                 await lang(`COOLDOWN`, interaction.user.id, [cooldown, await getUnit(cooldown, interaction.user.id)]),

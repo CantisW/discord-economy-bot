@@ -9,6 +9,7 @@ import {
 import { ButtonComponent, Discord, Slash } from "discordx";
 import { getSupply, parseDecimals } from "../util/blockchain.js";
 import { getConfig, getUserIndex, setUserIndex } from "../util/bot.js";
+import { IAccount } from "../util/types.js";
 import { lang, returnOrderedUsers } from "../util/users.js";
 
 const { coinName, ticker } = getConfig();
@@ -28,7 +29,7 @@ const forwardButton = new MessageButton({
 
 @Discord()
 export class Leaderboard {
-    users: any[];
+    users: IAccount[];
     supply: number;
     length: number;
 
@@ -63,7 +64,7 @@ export class Leaderboard {
         }
 
         for (let i = 0; i <= index; i++) {
-            let val = `${this.users[i].balance} ${ticker} (${parseDecimals(
+            const val = `${this.users[i].balance} ${ticker} (${parseDecimals(
                 (this.users[i].balance / this.supply) * 100,
             )}%)`;
             embed.addFields({

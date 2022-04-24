@@ -9,6 +9,7 @@ import {
 import { ButtonComponent, Discord, Slash, SlashOption } from "discordx";
 import { getTransactionInfo, MakeTransaction, returnOrderedBlockchain } from "../util/blockchain.js";
 import { getConfig, getUserIndex, setUserIndex } from "../util/bot.js";
+import { ITransaction } from "../util/types.js";
 import { lang } from "../util/users.js";
 
 const { coinName, ticker } = getConfig();
@@ -28,7 +29,7 @@ const forwardButton = new MessageButton({
 
 @Discord()
 export class Blockchain {
-    tx: any[];
+    tx: ITransaction[];
     length: number;
 
     @Slash("transfer", { description: "Make a transaction." })
@@ -42,7 +43,7 @@ export class Blockchain {
         amount: string,
         interaction: CommandInteraction,
     ) {
-        let amt = parseFloat(amount);
+        const amt = parseFloat(amount);
         if (!amt) return interaction.reply(await lang(`INPUT_INVALID_AMOUNT`, interaction.user.id));
         await MakeTransaction(interaction.user.id, recepient, amt)
             .then(async () => {
@@ -57,7 +58,7 @@ export class Blockchain {
         txid: string,
         interaction: CommandInteraction,
     ) {
-        let tx = await getTransactionInfo(txid);
+        const tx = await getTransactionInfo(txid);
         if (!tx) return interaction.reply(await lang(`TRANSACTION_VIEW_CANNOT_RECEIVE`, interaction.user.id));
 
         const embed = new MessageEmbed()

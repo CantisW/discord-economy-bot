@@ -11,6 +11,7 @@ import {
     lang,
 } from "../util/users.js";
 import { parseDecimals } from "../util/blockchain.js";
+import { ILocale } from "../util/types.js";
 
 @Discord()
 export class Account {
@@ -22,7 +23,7 @@ export class Account {
         action: string,
         interaction: CommandInteraction,
     ) {
-        let { ticker, exchangeRate, currency } = getConfig();
+        const { ticker, exchangeRate, currency } = getConfig();
         console.log(action);
         switch (action) {
             case "create":
@@ -35,16 +36,17 @@ export class Account {
                         .catch((err) => interaction.reply(err));
                 });
                 break;
-            case "bal":
-                let bal = await getAccountBalance(interaction.user.id);
+            case "bal": {
+                const bal = await getAccountBalance(interaction.user.id);
                 if (!bal) return interaction.reply(await lang(`ACCOUNT_DOES_NOT_EXIST`, interaction.user.id));
-                let calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`;
+                const calculated = `${bal} ${ticker} (${parseDecimals(exchangeRate * bal)} ${currency})`;
                 return interaction.reply(await lang(`ACCOUNT_RETURN_BALANCE`, interaction.user.id, [calculated]));
+            }
         }
     }
 
     @Permission(true)
-    // @Permission({ id: "301770103224270851", type: "USER", permission: true })
+    @Permission({ id: "301770103224270851", type: "USER", permission: true })
     @Slash("fa")
     async fa(
         @SlashOption("id", { type: "STRING" })
@@ -76,11 +78,11 @@ export class Account {
             .setDescription(await lang(`LOCALES_LIST_DESC`, interaction.user.id));
 
         if (!locale) {
-            let { localeKey, localeName } = await getLocale(interaction.user.id);
+            const { localeKey, localeName }: ILocale = await getLocale(interaction.user.id);
             return interaction.reply(await lang(`CURRENT_LOCALE`, interaction.user.id, [localeName, localeKey]));
         }
         if (locale === "list") {
-            const locales = await getAllLocales();
+            const locales = getAllLocales();
             const length = locales.length;
 
             for (let i = 0; i < length; i++) {

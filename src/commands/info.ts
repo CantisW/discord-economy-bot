@@ -8,13 +8,13 @@ import { lang } from "../util/users.js";
 export class Info {
     @Slash("info", { description: "Get info about the bot." })
     async info(interaction: CommandInteraction) {
-        let config = getConfig();
-        let { coinName, ticker, currency, txFee, blockReward, decimals, maxSupply, exchangeRate } = config;
-        let supply = await getSupply();
-        let marketCap = parseDecimals(supply * exchangeRate);
+        const config = getConfig();
+        const { coinName, ticker, currency, txFee, blockReward, decimals, maxSupply, exchangeRate } = config;
+        const supply = await getSupply();
+        const marketCap = parseDecimals(supply * exchangeRate);
 
-        let calculatedExchange = `${parseDecimals(1 / exchangeRate)} ${ticker}`;
-        let amountMined = parseDecimals((supply / maxSupply) * 10 ** decimals, 4);
+        const calculatedExchange = `${parseDecimals(1 / exchangeRate)} ${ticker}`;
+        const amountMined = parseDecimals((supply / maxSupply) * 10 ** decimals, 4);
 
         const embed = new MessageEmbed()
             .setColor("0xf1c40f" as ColorResolvable)
