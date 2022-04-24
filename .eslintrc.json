@@ -25,7 +25,7 @@
               "checksVoidReturn": false
             }
         ],
-        "@typescript-eslint/restrict-template-expressions": "warning",
+        "@typescript-eslint/restrict-template-expressions": 1,
         "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/no-unsafe-member-access": "off"
     }
