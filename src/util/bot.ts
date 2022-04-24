@@ -1,12 +1,12 @@
 import fs from "fs";
-import { IConfig, ISharedArray } from "./types";
+import { IConfig, ISettings, ISharedArray } from "./types";
 import { lang } from "./users.js";
 
 let cooldowns: ISharedArray[] = [];
 const usersArray: ISharedArray[] = [];
 
 export const getConfig = (): IConfig => {
-    let config = fs.readFileSync("./src/data/settings.json", "utf-8");
+    const config = fs.readFileSync("./src/data/settings.json", "utf-8");
     return JSON.parse(config);
 };
 
@@ -16,7 +16,7 @@ export const getConfig = (): IConfig => {
  * @param write
  */
 export const WriteToConfig = (property: string, write: string | number) => {
-    let config = getConfig();
+    const config = getConfig();
 
     config[property] = write;
 
@@ -25,10 +25,10 @@ export const WriteToConfig = (property: string, write: string | number) => {
     });
 };
 
-export const returnSetting = (setting: string) => {
-    let bot = fs.readFileSync("./src/data/bot.json", "utf-8");
-    let settings = JSON.parse(bot);
-    return setting ? settings[setting] : settings;
+export const returnSetting = (setting: string): string => {
+    const bot = fs.readFileSync("./src/data/bot.json", "utf-8");
+    const settings: ISettings = JSON.parse(bot);
+    return setting ? settings[setting] : "Invalid setting, idiot!"; // just assume that setting will be picked correctly
 };
 
 export const sanitizeId = (id: string) => {
@@ -50,7 +50,7 @@ export const doCooldown = (command: string, time: number, author: string) => {
         }
     });
     if (found) return true;
-    let obj: ISharedArray = { command: command, time: time, author: author };
+    const obj: ISharedArray = { command: command, time: time, author: author };
     cooldowns.push(obj);
     setTimeout(() => {
         cooldowns = cooldowns.filter((v) => v !== obj);
@@ -70,7 +70,7 @@ export const getUnit = async (cooldown: number, id: string) => {
  * @returns number
  */
 export const getUserIndex = (user: string, command: string) => {
-    let obj: ISharedArray = { command: command, time: 0, author: user };
+    const obj: ISharedArray = { command: command, time: 0, author: user };
     let found = false;
     let index = 0;
     usersArray.forEach((v) => {
@@ -91,7 +91,7 @@ export const getUserIndex = (user: string, command: string) => {
  * @returns number
  */
 export const setUserIndex = (user: string, command: string, index: number) => {
-    let obj: ISharedArray = { command: command, time: 0, author: user };
+    const obj: ISharedArray = { command: command, time: 0, author: user };
     if (index === 0) {
         usersArray.filter((v) => v !== obj);
     }
