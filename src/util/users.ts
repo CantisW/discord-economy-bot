@@ -1,6 +1,10 @@
+/* eslint-disable  @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable  @typescript-eslint/no-unsafe-call */
+/* eslint-disable  @typescript-eslint/no-unsafe-return */
+
 import { Account } from "../entity/Account.js";
 import { sanitizeId } from "./bot.js";
-import { IAccount } from "./types.js";
+import { IAccount, ILocale } from "./types.js";
 import fs from "fs";
 import path from "path";
 
@@ -8,7 +12,7 @@ const localesPath = "./src/locale";
 
 export const createAccount = (id: string): Promise<boolean> => {
     return new Promise(async (resolve, reject) => {
-        let obj: IAccount = { address: sanitizeId(id), balance: 0 };
+        const obj: IAccount = { address: sanitizeId(id), balance: 0 };
         try {
             await Account.create(obj).save();
             resolve(true);
@@ -29,7 +33,7 @@ export const getAccountBalance = async (id: string) => {
     if (user) return user.balance;
 };
 
-export const returnOrderedUsers = async () => {
+export const returnOrderedUsers = async (): Promise<IAccount[]> => {
     const user = await Account.createQueryBuilder("account")
         .select("*")
         .where("account.balance > 0")
@@ -52,21 +56,21 @@ export const getLocale = async (id: string) => {
     return { localeKey: file.locale, localeName: file.localeName };
 };
 
-export const getAllLocales = async () => {
-    let object = [];
+export const getAllLocales = () => {
+    const object: ILocale[] = [];
     const files = fs.readdirSync(localesPath).filter((file) => file.endsWith(".ts"));
 
-    for (const file in files) {
-        const localeFile = await import(`../locale/${files[file]}`);
+    files.forEach(async (file, index) => {
+        const localeFile = await import(`../locale/${files[index]}`);
         object.push({ localeKey: localeFile.locale, localeName: localeFile.localeName });
-    }
+    });
     return object;
 };
 
 export const changeLocale = async (id: string, locale: string) => {
     return new Promise(async (resolve, reject) => {
         const locales = fs.readdirSync(localesPath);
-        let localeFile = locale + ".ts";
+        const localeFile = locale + ".ts";
 
         const user = await Account.findOne({ address: id });
         if (!user) return reject(await lang(`ACCOUNT_DOES_NOT_EXIST`, id));
@@ -87,7 +91,7 @@ export const changeLocale = async (id: string, locale: string) => {
     });
 };
 
-export const lang = async (string: string, id: string, params?: any[]) => {
+export const lang = async (string: string, id: string, params?: (string | number)[]): Promise<string> => {
     let locale = "en-US";
 
     const user = await Account.findOne({ address: id });
@@ -102,7 +106,7 @@ export const lang = async (string: string, id: string, params?: any[]) => {
     if (typeof file.STRINGS[string] === "undefined") return file.STRINGS._NO_LOCALE(string);
 
     if (params) {
-        let length = params.length;
+        const length = params.length;
         // behold your eyes for some tf2 spaghetti
         switch (length) {
             case 1:
